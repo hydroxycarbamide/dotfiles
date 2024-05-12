@@ -1,0 +1,61 @@
+#!/usr/bin/env bash
+
+## Copyright (C) 2020-2021 Aditya Shakya <adi1090x@gmail.com>
+## Everyone is permitted to copy and distribute copies of this file under GNU-GPL3
+
+## i3lock for bspwm for Archcraft OS.
+
+## Get colors -----------------
+FG="#CDD6F4"
+BG="#1E1E2E"
+
+BLACK="#45475A"
+RED="#F38BA8"
+GREEN="#A6E3A1"
+YELLOW="#F9E2AF"
+BLUE="#89B4FA"
+MAGENTA="#F5C2E7"
+CYAN="#94E2D5"
+WHITE="#BAC2DE"
+
+TOTD=`fortune -n 90 -s | head -n 1`
+
+## Exec	-----------------
+
+#betterlockscreen --lock \
+#-- \
+#--{time,date,layout,verif,wrong,greeter}-font="Iosevka" \
+swaylock \
+-f \
+--color="${BG}FF"			\
+\
+--inside-ver-color=${GREEN}	\
+--inside-wrong-color=${RED}	\
+--inside-color="${BG}00"	\
+\
+--ring-ver-color=${GREEN}	\
+--ring-wrong-color=${RED}	\
+--ring-color="#f5e0dc"		\
+\
+--line-color=${BG}			\
+--separator-color=${BG}		\
+\
+--key-hl-color=${YELLOW}		\
+--bs-hl-color=${RED}			\
+\
+--font="Iosevka"			\
+--font-size=18							\
+\
+--indicator-radius 120 \
+--indicator-thickness 8
+
+# swaylock-effects
+#--screenshots \
+#--effect-blur 7x16 \
+#--effect-vignette 0.5:0.2 \
+
+# swayidle -w \
+# timeout 10 \
+
+# hyprctl dispatch dpms off
+# systemctl suspend
