@@ -1,0 +1,22 @@
+*
+
+# config
+!.config/alacritty
+!.config/foot
+!.config/hypr
+!.config/kanshi
+!.config/kitty
+!.config/nvim
+!.config/sway
+!.config/swaync
+!.config/waybar
+!.config/river
+
+# Assets
+!Pictures/wallpapers/ayaka.png
+
+# git
+!.gitignore
+!.gitattributes
+!.gitmodules
+
