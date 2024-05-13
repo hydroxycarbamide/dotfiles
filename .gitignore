@@ -3,6 +3,7 @@
 # config
 !.config/alacritty
 !.config/foot
+!.config/helix
 !.config/hypr
 !.config/kanshi
 !.config/kitty
