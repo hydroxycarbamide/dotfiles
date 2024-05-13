@@ -1,0 +1,51 @@
+
+# Font
+font = Lexend
+font-size = 15
+
+# Window Style
+horizontal = true
+anchor = top
+width = 100%
+height = 42
+
+outline-width = 0
+border-width = 0
+min-input-width = 120
+result-spacing = 30
+padding-top = 8
+padding-bottom = 0
+padding-left = 14
+padding-right = 0
+
+# Text style
+prompt-text = "~>"
+prompt-padding = 30
+
+# macchiato
+border-color = #f4dbd6
+
+background-color = #1e203077
+text-color = #cad3f5
+
+prompt-color = #1e2030
+prompt-background = #f4dbd6
+prompt-background-padding = 4, 10
+prompt-background-corner-radius = 5
+
+input-color = #1e2030
+input-background = #f4dbd6
+input-background-padding = 4, 10
+input-background-corner-radius = 5
+
+# alternate-result-background = #b8daf3
+alternate-result-background-padding = 4, 10
+alternate-result-background-corner-radius = 5
+
+selection-color = #1e2030
+selection-background = #f4dbd6
+selection-background-padding = 4, 10
+selection-background-corner-radius = 5
+selection-match-color = #8087a2
+
+clip-to-padding = false
