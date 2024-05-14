@@ -4,3 +4,6 @@
 [submodule ".config/waybar"]
 	path = .config/waybar
 	url = https://github.com/hydroxycarbamide/waybar_config.git
+[submodule "dot_config/nvim"]
+	path = dot_config/nvim
+	url = https://github.com/hydroxycarbamide/astrovim_user.git
