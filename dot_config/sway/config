@@ -99,7 +99,7 @@ bindsym $mod+w exec rofi -show window -theme catppuccin-macchiato
 
 bindsym $mod+Shift+s exec grim -g "$(slurp)" - | wl-copy
 bindsym $mod+Control+Shift+s exec grim -g "$(slurp)" /tmp/grim.png && tesseract -l eng+jpn /tmp/grim.png - | wl-copy && wl-paste | xargs -I{} notify-send "Tesseract" "Copied '{}'"
-bindsym $mod+P exec grim -o $(swaymsg -t get_outputs | jq -r '.[] | select(.focused) | .name') - | wl-copy
+bindsym $mod+P exec grim -g "$(slurp -o)" - | wl-copy
 bindsym $mod+Shift+P exec grim - | wl-copy
 
 # Drag floating windows by holding down $mod and left mouse button.

@@ -158,9 +158,17 @@ riverctl map normal Super D spawn "rofi -show drun -theme catppuccin-macchiato"
 riverctl map normal Super W spawn "rofi -show window -theme catppuccin-macchiato"
 riverctl map normal Super E spawn "kitty --class='fm-term' nnn -da -P p"
 riverctl map normal Super+Shift E spawn "xdg-open $HOME"
-riverctl map normal Super+Shift S spawn "hyprshot -m region"
+
+# shellcheck disable=SC2016
+riverctl map normal Super+Shift S spawn 'grim -g "$(slurp)" - | wl-copy'
+
+# shellcheck disable=SC2016
 riverctl map normal Super+Control+Shift S spawn 'grim -g "$(slurp)" /tmp/grim.png && tesseract -l eng+jpn /tmp/grim.png - | wl-copy && wl-paste | xargs -I{} notify-send "Tesseract" "Copied {}"'
-riverctl map normal Super Print spawn "hyprshot -m window"
+
+riverctl map normal Super P spawn "grim - | wl-copy"
+
+# shellcheck disable=SC2016
+riverctl map normal Super+Shift P spawn 'grim -g "$(slurp -o)" - | wl-copy'
 
 
 ############
@@ -280,12 +288,13 @@ flatpak run me.kozec.syncthingtk -m &
 systemctl start --user foot-server
 systemctl start --user sunshine
 
-# polkit
-/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
+## cliphist
+wl-paste --type text --watch cliphist store & #Stores only text data
+wl-paste --type image --watch cliphist store & #Stores only image data
 
 ## lock
 swayidle before-sleep 'loginctl lock-session' lock '/home/eric/.config/hypr/bsplock'
 
-## cliphist
-wl-paste --type text --watch cliphist store & #Stores only text data
-wl-paste --type image --watch cliphist store & #Stores only image data
+# polkit
+/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
+
