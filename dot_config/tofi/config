@@ -10,7 +10,7 @@ width = 30%
 height = 500
 
 outline-color= #24273a
-outline-width = 4
+outline-width = 0
 
 border-color = #f4dbd6
 border-width = 5
