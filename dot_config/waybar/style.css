@@ -8,7 +8,7 @@
 }
 
 window#waybar {
-	background: rgba(24, 25, 38, 0.0);
+	background: rgba(24, 25, 38, 1.0);
 	color: white;
 }
 
@@ -24,7 +24,7 @@ tooltip {
 .modules-center,
 .modules-right,
 #mpdris {
-	background-color: #1e2030;
+	background-color: #24273a;
   margin: 2px;
   padding: 2px;
 }
