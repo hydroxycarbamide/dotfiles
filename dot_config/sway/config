@@ -389,7 +389,7 @@ mouse_warping container
 
 # cursor
 
-# set $my_cursor Qogir
+set $my_cursor Qogir-dark
 set $my_cursor_size 24
 
 seat seat0 xcursor_theme $my_cursor $my_cursor_size
@@ -449,7 +449,8 @@ exec systemctl start --user sunshine
 exec wl-paste --type text --watch cliphist store
 exec wl-paste --type image --watch cliphist store
 exec swayidle before-sleep 'loginctl lock-session' lock '/home/eric/.config/hypr/bsplock'
-exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
+# exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
+exec /usr/lib/polkit-kde-authentication-agent-1 &
 exec rm -f /tmp/sovpipe && mkfifo /tmp/sovpipe && tail -f /tmp/sovpipe | sov -t 200 -n -c 1 -s $HOME/.config/sov
 exec nm-applet
 exec dbus-update-activation-environment DISPLAY XAUTHORITY WAYLAND_DISPLAY XDG_CURRENT_DESKTOP

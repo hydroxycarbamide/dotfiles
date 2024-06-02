@@ -184,11 +184,17 @@ riverctl border-width 2
 # Set the default layout generator to be rivertile and start it.
 # River will send the process group of the init executable SIGTERM on exit.
 riverctl default-layout rivertile
-rivertile -view-padding 4 -outer-padding 8 &
+rivertile -view-padding 6 -outer-padding 10 &
+
+rivertile smart-padding 0, \
+    view-padding 6, \
+    outer-padding 10, &
+
+
 
 # cursor
 riverctl set-cursor-warp on-focus-change
-riverctl xcursor-theme Adwaita 24
+riverctl xcursor-theme Qogir-dark 24
 riverctl focus-follows-cursor always
 
 
@@ -281,10 +287,10 @@ kdeconnect-indicator &
 ## osd
 swayosd-server &
 
-# syncthing
+## syncthing
 flatpak run me.kozec.syncthingtk -m &
 
-# systemctl restarts
+## systemctl restarts
 systemctl start --user foot-server
 systemctl start --user sunshine
 
@@ -292,9 +298,10 @@ systemctl start --user sunshine
 wl-paste --type text --watch cliphist store & #Stores only text data
 wl-paste --type image --watch cliphist store & #Stores only image data
 
+# polkit
+## /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
+/usr/lib/polkit-kde-authentication-agent-1
+
 ## lock
 swayidle before-sleep 'loginctl lock-session' lock '/home/eric/.config/hypr/bsplock'
-
-# polkit
-/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
 
