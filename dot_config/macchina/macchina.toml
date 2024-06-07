@@ -1,0 +1,17 @@
+
+theme = "hydro"
+
+show = [
+  "OperatingSystem",
+  "Kernel",
+  "Distribution",
+  "DesktopEnvironment",
+  "WindowManager",
+  # "Shell",
+  "Uptime",
+  # "Processor",
+  "ProcessorLoad",
+  "Memory",
+  # "GPU",
+  # "DiskSpace"
+]
