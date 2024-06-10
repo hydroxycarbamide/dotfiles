@@ -93,6 +93,7 @@ widget>label {
 	background-color: #939ab7;
 }
 
+#tags button.urgent,
 #workspaces button.urgent {
 	color: #0f0f0f;
 	background-color: #9ec3c4;
