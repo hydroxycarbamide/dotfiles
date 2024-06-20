@@ -81,8 +81,6 @@ if status is-interactive
     trap nnn_cd EXIT
 end
 
-thefuck --alias | source
-
 # pnpm
 set -gx PNPM_HOME "/home/eric/.local/share/pnpm"
 if not string match -q -- $PNPM_HOME $PATH
