@@ -1,13 +1,13 @@
 {
   "output": ["DP-1", "HDMI-A-1"],
-  "layer": "top",
+  "layer": "bottom",
   "position": "top",
   "height": 32,
   "modules-left": [
     "hyprland/workspaces",
     "sway/workspaces#sway",
     "river/tags",
-    //"river/layout",
+    // "river/layout",
 
     "group/visualisation"
     // "custom/media",

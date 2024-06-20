@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Number of tests
-NUM_TESTS=5
+NUM_TESTS=10
 
 # Counter for correct answers
 correct_answers=0
