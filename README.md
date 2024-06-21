@@ -12,6 +12,10 @@ yay -S --needed chezmoi \
   foot swayosd-git swayidle wl-clipboard \
   waybar-cava hyprpaper swaync \
   starship \
+  swaylock fortune-mod \
+  qogir-icon-theme \
+  lexend-fonts-git ttf-firacode-nerd \
+  nnn-nerd \
   git git-lfs lazygit
 ```
 
