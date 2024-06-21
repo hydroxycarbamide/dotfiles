@@ -212,6 +212,9 @@ riverctl set-repeat 50 200
 # mouse
 riverctl input pointer-13159-6403-EndGameGear_XM1_Gaming_Mouse accel-profile flat
 
+riverctl input pointer-*Touchpad accel-profile adaptive
+riverctl input pointer-*Touchpad natural-scroll enabled
+
 # Clipboard
 riverctl map normal Super V spawn 'bash -c "cliphist list | rofi -dmenu | cliphist decode | wl-copy"'
 
