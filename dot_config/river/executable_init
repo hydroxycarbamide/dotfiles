@@ -291,9 +291,6 @@ kdeconnect-indicator &
 ## osd
 swayosd-server &
 
-## syncthing
-flatpak run me.kozec.syncthingtk -m &
-
 ## systemctl restarts
 systemctl start --user foot-server
 systemctl start --user sunshine

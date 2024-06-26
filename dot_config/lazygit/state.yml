@@ -1,0 +1,17 @@
+lastupdatecheck: 0
+recentrepos:
+    - /home/eric/.local/share/chezmoi
+    - /home/eric/.config/nvim
+    - /home/eric/.local/share/chezmoi/dot_config/nvim
+    - /home/eric/Github/crylia-theme
+startuppopupversion: 5
+lastversion: 0.42.0
+customcommandshistory:
+    - q
+hidecommandlog: false
+ignorewhitespaceindiffview: false
+diffcontextsize: 3
+localbranchsortorder: recency
+remotebranchsortorder: alphabetical
+gitlogorder: topo-order
+gitlogshowgraph: always
