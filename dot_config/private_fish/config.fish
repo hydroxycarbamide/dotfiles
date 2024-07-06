@@ -69,8 +69,6 @@ if status is-interactive
     # unset
     alias unset 'set --erase'
 
-    # adb
-    alias adb='HOME="$XDG_DATA_HOME"/android adb'
 
     function nnn_cd
         if test -n "$NNN_PIPE"
