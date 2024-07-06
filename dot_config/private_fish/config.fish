@@ -36,6 +36,8 @@ if status is-interactive
     # vim
     alias vim='nvim'
     alias v='vim'
+    alias vide='neovide'
+    alias vid='neovide'
 
     # emacs
     # alias emacs='emacsclient -nc -s instance1'
