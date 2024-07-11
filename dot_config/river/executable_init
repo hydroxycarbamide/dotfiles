@@ -241,14 +241,15 @@ riverctl rule-add ssd
 riverctl rule-add -app-id 'cs2' output DP-1
 riverctl rule-add -app-id 'starrail.exe' output DP-1
 riverctl rule-add -app-id 'genshinimpact.exe' output DP-1
+riverctl rule-add -app-id 'zenlesszonezero.exe' output DP-1
 
 # tags
 declare -a rule_sets
 
 rule_sets[1]="footclient kitty foot"
 rule_sets[2]="LibreWolf firefox"
-rule_sets[3]="org.gnome.Nautilus fm-term org.qbittorrent.qBittorrent syncplay"
-rule_sets[4]="com.usebottles.bottles cs2 osu* org.prismlauncher.PrismLauncher moe.launcher.an-anime-game-launcher moe.launcher.the-honkers-railway-launcher genshinimpact.exe starrail.exe steam steam_app_*"
+rule_sets[3]="org.gnome.Nautilus fm-term org.qbittorrent.qBittorrent syncplay org.kde.dolphin org.kde.ktorrent"
+rule_sets[4]="com.usebottles.bottles cs2 osu* org.prismlauncher.PrismLauncher moe.launcher.sleepy-launcher moe.launcher.an-anime-game-launcher moe.launcher.the-honkers-railway-launcher genshinimpact.exe starrail.exe zenlesszonezero.exe steam steam_app_*"
 rule_sets[5]="org.remmina.Remmina Code VSCodium"
 rule_sets[6]="io.github.celluloid_player.Celluloid mpv Spotify"
 rule_sets[7]="discord vesktop teams-for-linux 'Microsoft Teams - Preview'"
