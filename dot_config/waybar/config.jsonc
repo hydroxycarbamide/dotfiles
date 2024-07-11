@@ -390,7 +390,7 @@
     "format": "{icon}",
     "format-bluetooth": "{icon} ",
     "format-muted": "   ",
-    "tooltip-format": "{icon}  {volume}% {format_source} {desc}",
+    "tooltip-format": "{volume}% {format_source} {desc}",
     "on-click": "pactl set-sink-mute @DEFAULT_SINK@ toggle",
     "on-click-middle": "helvum",
     "on-click-right": "pavucontrol",
