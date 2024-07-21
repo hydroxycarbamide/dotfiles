@@ -76,3 +76,11 @@
 ;;
 ;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
 ;; they are implemented.
+
+(map! :n "C-h" #'windmove-left
+      :n "C-j" #'windmove-down
+      :n "C-k" #'windmove-up
+      :n "C-l" #'windmove-right)
+
+(map! :leader
+      :desc "Toggle NeoTree" "e" #'neotree-toggle)
