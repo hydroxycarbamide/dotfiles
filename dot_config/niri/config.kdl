@@ -120,6 +120,7 @@ input {
 output "DP-1" {
     mode "1920x1080"
     position x=0 y=0
+    variable-refresh-rate
 }
 
 
@@ -388,6 +389,18 @@ animations {
     // open-fullscreen false
 }
 
+window-rule {
+    match app-id="steam_app_*"
+    match app-id="cs2"
+    match app-id="genshinimpact.exe"
+    match app-id="starrail.exe"
+    match app-id="zenlesszonezero.exe"
+
+    open-on-output "DP-1"
+    open-maximized true
+    open-fullscreen true
+}
+
 // Here's a useful example. Work around WezTerm's initial configure bug
 // by setting an empty default-column-width.
 window-rule {
@@ -512,19 +525,19 @@ binds {
     Mod+Page_Up        { focus-workspace-up; }
     Mod+U              { focus-workspace-down; }
     Mod+I              { focus-workspace-up; }
-    Mod+Ctrl+Page_Down { move-column-to-workspace-down; }
-    Mod+Ctrl+Page_Up   { move-column-to-workspace-up; }
-    Mod+Ctrl+U         { move-column-to-workspace-down; }
-    Mod+Ctrl+I         { move-column-to-workspace-up; }
+    Mod+Shift+Page_Down { move-column-to-workspace-down; }
+    Mod+Shift+Page_Up   { move-column-to-workspace-up; }
+    Mod+Shift+U         { move-column-to-workspace-down; }
+    Mod+Shift+I         { move-column-to-workspace-up; }
 
     // Alternatively, there are commands to move just a single window:
     // Mod+Ctrl+Page_Down { move-window-to-workspace-down; }
     // ...
 
-    Mod+Shift+Page_Down { move-workspace-down; }
-    Mod+Shift+Page_Up   { move-workspace-up; }
-    Mod+Shift+U         { move-workspace-down; }
-    Mod+Shift+I         { move-workspace-up; }
+    Mod+Ctrl+Page_Down { move-workspace-down; }
+    Mod+Ctrl+Page_Up   { move-workspace-up; }
+    Mod+Ctrl+U         { move-workspace-down; }
+    Mod+Ctrl+I         { move-workspace-up; }
 
     // You can bind mouse wheel scroll ticks using the following syntax.
     // These binds will change direction based on the natural-scroll setting.
@@ -693,9 +706,9 @@ debug {
 spawn-at-startup "hyprpaper"
 spawn-at-startup "swaync"
 spawn-at-startup "waybar"
-spawn-at-startup "systemctl start --user foot-server"
-spawn-at-startup "systemctl start --user sunshine"
-spawn-at-startup "systemctl start --user gammastep.service"
+spawn-at-startup "systemctl" "start" "--user" "foot-server"
+spawn-at-startup "systemctl" "start" "--user" "sunshine"
+spawn-at-startup "systemctl" "start" "--user" "gammastep"
 spawn-at-startup "/usr/lib/polkit-kde-authentication-agent-1"
 spawn-at-startup "/usr/lib/kdeconnectd"
 spawn-at-startup "kdeconnect-indicator"
