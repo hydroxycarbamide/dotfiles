@@ -423,8 +423,12 @@ binds {
     Mod+Return { spawn "foot"; }
     Mod+D { spawn "rofi" "-show" "drun" "-theme" "catppuccin-macchiato"; }
     Mod+W { spawn "rofi" "-show" "window" "-theme" "catppuccin-macchiato"; }
+    Mod+Q { spawn "rofi" "-show" "power-menu" "-modi" "power-menu:rofi-power-menu"; }
+
     Mod+E { spawn "kitty" "--class='fm-term'" "nnn" "-da" "-P" "p"; }
     Mod+Shift+E { spawn "xdg-open" "."; }
+
+    Mod+V { spawn "bash" "-c" "cliphist list | rofi -dmenu | cliphist decode | wl-copy"; }
 
     // Example volume keys mappings for PipeWire & WirePlumber.
     // XF86AudioRaiseVolume { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.1+"; }
@@ -605,7 +609,7 @@ binds {
     Mod+R { switch-preset-column-width; }
     Mod+F { maximize-column; }
     Mod+Shift+F { fullscreen-window; }
-    Mod+Q { center-column; }
+    Mod+Ctrl+C { center-column; }
 
     // Finer width adjustments.
     // This command can also:
@@ -686,11 +690,12 @@ debug {
 // Note that running niri as a session supports xdg-desktop-autostart,
 // which may be more convenient to use.
 // spawn-at-startup "alacritty" "-e" "fish"
+spawn-at-startup "hyprpaper"
 spawn-at-startup "swaync"
 spawn-at-startup "waybar"
-spawn-at-startup "hyprpaper"
 spawn-at-startup "systemctl start --user foot-server"
 spawn-at-startup "systemctl start --user sunshine"
+spawn-at-startup "systemctl start --user gammastep.service"
 spawn-at-startup "/usr/lib/polkit-kde-authentication-agent-1"
 spawn-at-startup "/usr/lib/kdeconnectd"
 spawn-at-startup "kdeconnect-indicator"
