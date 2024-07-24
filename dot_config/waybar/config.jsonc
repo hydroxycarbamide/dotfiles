@@ -7,6 +7,7 @@
     "hyprland/workspaces",
     "sway/workspaces#sway",
     "river/tags",
+    // "custom/workspaces",
     // "river/layout",
 
     "group/visualisation"
@@ -165,6 +166,9 @@
     "format": "{}",
     "min-length": 4,
     "align": "right"
+  },
+  "custom/workspaces": {
+    "exec": "$HOME/.config/waybar/modules/workspaces.nu \"$WAYBAR_OUTPUT_NAME\""
   },
   "wlr/taskbar": {
     "all-outputs": false,
@@ -347,10 +351,10 @@
     ]
   },
   "network": {
-    "format-wifi": "",
-    "format-ethernet": "󰈀",
+    "format-wifi": " ",
+    "format-ethernet": "󰈀 ",
     "format-linked": "{ifname} (No IP) ",
-    "format-disconnected": "󰤮   Disconnected",
+    "format-disconnected": "󰤮   Disconnected ",
     "tooltip-format-ethernet": "{ifname} | {ipaddr}/{cidr} | Down Speed: {bandwidthDownBits}, Up Speed: {bandwidthUpBits}",
     "tooltip-format-wifi": "{ifname} | {ipaddr}/{cidr} | {essid} | Signal Strenght: {signalStrength}% | Down Speed: {bandwidthDownBits}, Up Speed: {bandwidthUpBits}",
     "on-click": "networkmanager_dmenu"
