@@ -305,5 +305,5 @@ wl-paste --type image --watch cliphist store & #Stores only image data
 /usr/lib/polkit-kde-authentication-agent-1 &
 
 ## lock
-swayidle before-sleep 'loginctl lock-session' lock '/home/eric/.config/hypr/bsplock' &
+swayidle before-sleep 'loginctl lock-session' lock 'swaylock' &
 

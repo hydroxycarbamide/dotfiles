@@ -1,0 +1,22 @@
+color=#1E1E2EFF
+
+inside-ver-color=#A6E3A1
+inside-wrong-color=#F38BA8
+inside-color=#1E1E2E00
+
+ring-ver-color=#A6E3A1
+ring-wrong-color=#A6E3A1
+ring-color=#f5e0dc
+
+line-color=#1E1E2E
+separator-color=#1E1E2E
+
+key-hl-color=#F9E2AF
+bs-hl-color=#F38BA8
+
+font="FiraCode Nerd Font"
+font-size=18
+
+indicator-radius=120
+indicator-thickness=8
+
