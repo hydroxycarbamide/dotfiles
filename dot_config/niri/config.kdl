@@ -74,12 +74,12 @@ input {
     warp-mouse-to-focus
 
     // Focus windows and outputs automatically when moving the mouse into them.
-    focus-follows-mouse 
+    focus-follows-mouse
 
     // Uncomment this to enable workspace auto-back-and-forth.
     // If enabled, switching to the same workspace by index twice will switch back to the
     // previous workspace.
-    workspace-auto-back-and-forth
+    // workspace-auto-back-and-forth
 }
 
 // You can configure outputs by their name, which you can find
@@ -120,7 +120,7 @@ input {
 output "DP-1" {
     mode "1920x1080"
     position x=0 y=0
-    variable-refresh-rate
+    // variable-refresh-rate
 }
 
 
@@ -436,7 +436,7 @@ binds {
     Mod+Return { spawn "foot"; }
     Mod+D { spawn "rofi" "-show" "drun" "-theme" "catppuccin-macchiato"; }
     Mod+W { spawn "rofi" "-show" "window" "-theme" "catppuccin-macchiato"; }
-    Mod+Q { spawn "rofi" "-show" "power-menu" "-modi" "power-menu:rofi-power-menu"; }
+    Mod+Q { spawn "wlogout" "-p" "layer-shell"; }
 
     Mod+E { spawn "kitty" "--class='fm-term'" "nnn" "-da" "-P" "p"; }
     Mod+Shift+E { spawn "xdg-open" "."; }
@@ -687,7 +687,7 @@ debug {
     disable-cursor-plane
 
     // Override the DRM device that niri will use for all rendering.
-    // render-drm-device "/dev/dri/renderD129"
+    render-drm-device "/dev/dri/renderD128"
 
     // Enable the color-transformations capability of the Smithay renderer.
     // May cause a slight decrease in rendering performance.
@@ -708,12 +708,12 @@ spawn-at-startup "swaync"
 spawn-at-startup "waybar"
 spawn-at-startup "systemctl" "start" "--user" "foot-server"
 spawn-at-startup "systemctl" "start" "--user" "sunshine"
-spawn-at-startup "systemctl" "start" "--user" "gammastep"
+// spawn-at-startup "systemctl" "start" "--user" "gammastep"
 spawn-at-startup "/usr/lib/polkit-kde-authentication-agent-1"
 spawn-at-startup "/usr/lib/kdeconnectd"
 spawn-at-startup "kdeconnect-indicator"
 spawn-at-startup "wl-paste" "--type" "text" "--watch" "cliphist" "store"
 spawn-at-startup "wl-paste" "--type" "image" "--watch" "cliphist" "store"
 spawn-at-startup "swayosd-server"
-spawn-at-startup "swayidle before-sleep 'loginctl lock-session' lock 'swaylock' &"
+spawn-at-startup "swayidle" "before-sleep" "'loginctl lock-session'" "lock" "'swaylock'"
 spawn-at-startup "xwayland-satellite"

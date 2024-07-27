@@ -212,8 +212,9 @@ riverctl set-repeat 50 200
 # mouse
 riverctl input pointer-13159-6403-EndGameGear_XM1_Gaming_Mouse accel-profile flat
 
-riverctl input pointer-*Touchpad accel-profile adaptive
-riverctl input pointer-*Touchpad natural-scroll enabled
+riverctl input *Touchpad accel-profile adaptive
+riverctl input *Touchpad natural-scroll enabled
+riverctl input *Touchpad tap enabled
 
 # Clipboard
 riverctl map normal Super V spawn 'bash -c "cliphist list | rofi -dmenu | cliphist decode | wl-copy"'
@@ -295,6 +296,7 @@ swayosd-server &
 ## systemctl restarts
 systemctl start --user foot-server
 systemctl start --user sunshine
+# systemctl start --user gammastep.service 
 
 ## cliphist
 wl-paste --type text --watch cliphist store & #Stores only text data
@@ -305,5 +307,5 @@ wl-paste --type image --watch cliphist store & #Stores only image data
 /usr/lib/polkit-kde-authentication-agent-1 &
 
 ## lock
-swayidle before-sleep 'loginctl lock-session' lock 'swaylock' &
+swayidle before-sleep 'loginctl lock-session' lock '/home/eric/.config/hypr/bsplock' &
 
