@@ -151,7 +151,7 @@ widget>label {
 
 #taskbar button.maximized,
 #taskbar button.fullscreen {
-	border-bottom: 3px solid #8aadf4;
+	border-top: 3px solid #8aadf4;
 }
 
 #taskbar button.active {

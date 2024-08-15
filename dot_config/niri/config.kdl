@@ -74,7 +74,7 @@ input {
     warp-mouse-to-focus
 
     // Focus windows and outputs automatically when moving the mouse into them.
-    focus-follows-mouse
+    focus-follows-mouse max-scroll-amount="0%"
 
     // Uncomment this to enable workspace auto-back-and-forth.
     // If enabled, switching to the same workspace by index twice will switch back to the
@@ -204,7 +204,8 @@ layout {
     }
 
     // You can change the default width of the new windows.
-    default-column-width { proportion 0.5; }
+    default-column-width { proportion 0.66667; }
+
     // If you leave the brackets empty, the windows themselves will decide their initial width.
     // default-column-width {}
 
@@ -229,7 +230,7 @@ layout {
     // - "on-overflow", focusing a column will center it if it doesn't fit
     //   together with the previously focused column.
     // - "always", the focused column will always be centered.
-    center-focused-column "never"
+    center-focused-column "on-overflow"
 }
 
 // You can override environment variables for processes spawned by niri.
@@ -435,13 +436,13 @@ binds {
     Mod+Shift+Slash { show-hotkey-overlay; }
 
     // Suggested binds for running programs: terminal, app launcher, screen locker.
-    Mod+Return { spawn "foot"; }
+    Mod+Return { spawn "footclient"; }
     Mod+D { spawn "rofi" "-show" "drun" "-theme" "catppuccin-macchiato"; }
     Mod+W { spawn "rofi" "-show" "window" "-theme" "catppuccin-macchiato"; }
     Mod+Q { spawn "wlogout" "-p" "layer-shell"; }
 
-    Mod+E { spawn "kitty" "--class='fm-term'" "nnn" "-da" "-P" "p"; }
-    Mod+Shift+E { spawn "xdg-open" "."; }
+    Mod+E repeat=false { spawn "kitty" "--class='fm-term'" "nnn" "-da" "-P" "p"; }
+    Mod+Shift+E repeat=false { spawn "xdg-open" "."; }
 
     Mod+V { spawn "bash" "-c" "cliphist list | rofi -dmenu | cliphist decode | wl-copy"; }
 
@@ -621,10 +622,11 @@ binds {
     Mod+BracketLeft  { consume-or-expel-window-left; }
     Mod+BracketRight { consume-or-expel-window-right; }
 
-    Mod+R { switch-preset-column-width; }
-    Mod+F { maximize-column; }
-    Mod+Shift+F { fullscreen-window; }
+    Mod+R repeat=false  { switch-preset-column-width; }
+    Mod+F repeat=false  { maximize-column; }
+    Mod+Shift+F repeat=false  { fullscreen-window; }
     Mod+Ctrl+C { center-column; }
+    Mod+X { center-column; }
 
     // Finer width adjustments.
     // This command can also:
