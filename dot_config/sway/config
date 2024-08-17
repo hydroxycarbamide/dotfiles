@@ -262,7 +262,8 @@ bindsym $mod+minus scratchpad show
 ##############
 
 bindsym $mod+Shift+e exec xdg-open $HOME
-bindsym $mod+e exec kitty --class="fm-term" nnn -da -P p
+# bindsym $mod+e exec kitty --class="fm-term" nnn -da -P p
+bindsym $mod+e exec footclient -a fm-term yazi
 bindsym $mod+v exec cliphist list | rofi -dmenu | cliphist decode | wl-copy
 
 ########

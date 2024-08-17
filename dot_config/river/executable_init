@@ -156,7 +156,8 @@ done
 
 riverctl map normal Super D spawn "rofi -show drun -theme catppuccin-macchiato"
 riverctl map normal Super W spawn "rofi -show window -theme catppuccin-macchiato"
-riverctl map normal Super E spawn "kitty --class='fm-term' nnn -da -P p"
+# riverctl map normal Super E spawn "kitty --class='fm-term' nnn -da -P p"
+riverctl map normal Super E spawn "footclient -a fm-term yazi"
 riverctl map normal Super+Shift E spawn "xdg-open $HOME"
 
 # shellcheck disable=SC2016

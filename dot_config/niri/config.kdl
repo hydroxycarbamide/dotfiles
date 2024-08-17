@@ -441,7 +441,8 @@ binds {
     Mod+W { spawn "rofi" "-show" "window" "-theme" "catppuccin-macchiato"; }
     Mod+Q { spawn "wlogout" "-p" "layer-shell"; }
 
-    Mod+E repeat=false { spawn "kitty" "--class='fm-term'" "nnn" "-da" "-P" "p"; }
+    // Mod+E repeat=false { spawn "kitty" "--class='fm-term'" "nnn" "-da" "-P" "p"; }
+    Mod+E repeat=false { spawn "footclient" "-a" "fm-term" "yazi"; }
     Mod+Shift+E repeat=false { spawn "xdg-open" "."; }
 
     Mod+V { spawn "bash" "-c" "cliphist list | rofi -dmenu | cliphist decode | wl-copy"; }
