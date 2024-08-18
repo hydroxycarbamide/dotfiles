@@ -149,9 +149,6 @@ keymap = [
 	# Help
 	{ on = "~",    run = "help", desc = "Open help" },
 	{ on = "<F1>", run = "help", desc = "Open help" },
-	# { on = [ "<C-n>" ], run = '''
- #    shell 'dragon -x -i -T "$1"' --confirm
-	# ''' },
 	{ on = [ "<C-n>" ], run = '''
 	    shell 'ripdrag "$@" -x 2>/dev/null &' --confirm
 	''' },
