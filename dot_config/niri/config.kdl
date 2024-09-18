@@ -120,7 +120,7 @@ input {
 output "DP-1" {
     mode "1920x1080"
     position x=0 y=0
-    // variable-refresh-rate
+    variable-refresh-rate  on-demand=true
 }
 
 
@@ -203,11 +203,17 @@ layout {
         // fixed 1920
     }
 
+    // You can also customize the heights that "switch-preset-window-height" (Mod+Shift+R) toggles between.
+    // preset-window-heights {
+    //     proportion 0.5
+    //     proportion 1.0
+    // }
+
     // You can change the default width of the new windows.
-    default-column-width { proportion 0.66667; }
+    // default-column-width { proportion 0.66667; }
 
     // If you leave the brackets empty, the windows themselves will decide their initial width.
-    // default-column-width {}
+    default-column-width {}
 
     // Set gaps around windows in logical pixels.
     gaps 16
@@ -235,9 +241,6 @@ layout {
 
 // You can override environment variables for processes spawned by niri.
 environment {
-    // Set a variable like this:
-    // QT_QPA_PLATFORM "wayland"
-
     DISPLAY ":0"
     QT_QPA_PLATFORMTHEME "qt6ct"
 }
@@ -398,10 +401,24 @@ window-rule {
     match app-id="genshinimpact.exe"
     match app-id="starrail.exe"
     match app-id="zenlesszonezero.exe"
+    match app-id="osu!"
+    match app-id="Minecraft*"
 
+    variable-refresh-rate true
     open-on-output "DP-1"
     open-maximized true
     open-fullscreen true
+}
+
+window-rule {
+    match app-id="firefox"
+    open-maximized true
+}
+
+window-rule {
+    match app-id="foot*"
+    match app-id="fm-term"
+    default-column-width { proportion 0.5; }
 }
 
 // Here's a useful example. Work around WezTerm's initial configure bug
@@ -439,7 +456,7 @@ binds {
     Mod+Return { spawn "footclient"; }
     Mod+D { spawn "rofi" "-show" "drun" "-theme" "catppuccin-macchiato"; }
     Mod+W { spawn "rofi" "-show" "window" "-theme" "catppuccin-macchiato"; }
-    Mod+Q { spawn "wlogout" "-p" "layer-shell"; }
+    Mod+Q repeat=false { spawn "wlogout" "-p" "layer-shell"; }
 
     // Mod+E repeat=false { spawn "kitty" "--class='fm-term'" "nnn" "-da" "-P" "p"; }
     Mod+E repeat=false { spawn "footclient" "-a" "fm-term" "yazi"; }
@@ -619,10 +636,14 @@ binds {
     // Mod+Shift+BracketLeft  { consume-window-into-column; }
     // Mod+Shift+BracketRight { expel-window-from-column; }
 
+    Mod+Shift+BracketLeft  { consume-window-into-column; }
+    Mod+Shift+BracketRight { expel-window-from-column; }
     // There are also commands that consume or expel a single window to the side.
     Mod+BracketLeft  { consume-or-expel-window-left; }
     Mod+BracketRight { consume-or-expel-window-right; }
 
+    Mod+Shift+R { switch-preset-window-height; }
+    Mod+Ctrl+R { reset-window-height; }
     Mod+R repeat=false  { switch-preset-column-width; }
     Mod+F repeat=false  { maximize-column; }
     Mod+Shift+F repeat=false  { fullscreen-window; }
@@ -656,7 +677,9 @@ binds {
     Mod+Shift+S { screenshot; }
     Ctrl+Print { screenshot-screen; }
     Alt+Print { screenshot-window; }
-    Mod+Ctrl+Shift+S { screenshot-window; }
+    // Mod+Ctrl+Shift+S { screenshot-window; }
+    // Mod+Ctrl+Shift+S { spawn "normcap"; }
+    Mod+Ctrl+Shift+S { spawn "bash" "-c" "bash -c 'grim -g \"$(slurp)\" /tmp/grim.png && tesseract -l eng+jpn /tmp/grim.png - | wl-copy && wl-paste | xargs -I{} notify-send \"Tesseract\" \"Copied '{}'\"'"; }
 
     // The quit action will show a confirmation dialog to avoid accidental exits.
     // If you want to skip the confirmation dialog, set the flag like so:
@@ -713,6 +736,7 @@ spawn-at-startup "swaync"
 spawn-at-startup "waybar"
 spawn-at-startup "systemctl" "start" "--user" "foot-server"
 spawn-at-startup "systemctl" "start" "--user" "sunshine"
+spawn-at-startup "systemctl" "start" "--user" "xwayland-satellite"
 // spawn-at-startup "systemctl" "start" "--user" "gammastep"
 spawn-at-startup "/usr/lib/polkit-kde-authentication-agent-1"
 spawn-at-startup "/usr/lib/kdeconnectd"
@@ -721,4 +745,4 @@ spawn-at-startup "wl-paste" "--type" "text" "--watch" "cliphist" "store"
 spawn-at-startup "wl-paste" "--type" "image" "--watch" "cliphist" "store"
 spawn-at-startup "swayosd-server"
 spawn-at-startup "swayidle" "before-sleep" "'loginctl lock-session'" "lock" "'swaylock'"
-spawn-at-startup "xwayland-satellite"
+// spawn-at-startup "xwayland-satellite"
