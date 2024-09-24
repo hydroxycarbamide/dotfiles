@@ -71,15 +71,30 @@ if status is-interactive
     # unset
     alias unset 'set --erase'
 
+    # yazi
+    # alias y='yazi'
+    alias yz='yazi'
+
 
     function nnn_cd
         if test -n "$NNN_PIPE"
-            printf "%s\0" "0c$PWD" > "$NNN_PIPE" !&
+            printf "%s\0" "0c$PWD" >"$NNN_PIPE" ! &
         end
     end
-    
+
     trap nnn_cd EXIT
+
+    # Change Yazi's CWD to PWD on subshell exit
+    if [ -n "$YAZI_ID" ]
+    	trap 'ya pub dds-cd --str "$PWD"' EXIT
+    end
 end
+
+# tmux
+#if status is-interactive
+#and not set -q TMUX
+#    exec tmux
+#end
 
 # pnpm
 set -gx PNPM_HOME "/home/eric/.local/share/pnpm"
@@ -90,28 +105,28 @@ end
 
 # nnn
 alias N="sudo -E nnn"
-set -gx LC_COLLATE "C"
-set -gx NNN_PAGER "cat"
-set -gx NNN_OPTS "eaA"
+set -gx LC_COLLATE C
+set -gx NNN_PAGER cat
+set -gx NNN_OPTS eaA
 set -gx NNN_OPENER '/home/eric/.config/nnn/plugins/nuke'
 set -gx NNN_PLUG 'd:dragdrop;f:finder;i:!fish -i*;m:mtpmount;o:fzopen;p:preview-tui;r:rsynccp;s:suedit;t:nmount;v:imgview;z:autojump'
-set -gx SPLIT 'v' # to split Kitty vertically
+set -gx SPLIT v # to split Kitty vertically
 
-set BLK "03"
-set CHR "03"
-set DIR "04"
-set EXE "02"
-set REG "07"
-set HARDLINK "05"
-set SYMLINK "05"
-set MISSING "08"
-set ORPHAN "01"
-set FIFO "06"
-set SOCK "03"
-set UNKNOWN "01"
+set BLK 03
+set CHR 03
+set DIR 04
+set EXE 02
+set REG 07
+set HARDLINK 05
+set SYMLINK 05
+set MISSING 08
+set ORPHAN 01
+set FIFO 06
+set SOCK 03
+set UNKNOWN 01
 set -gx NNN_FCOLORS "$BLK$CHR$DIR$EXE$REG$HARDLINK$SYMLINK$MISSING$ORPHAN$FIFO$SOCK$UNKNOWN"
 set -gx NNN_COLORS "#04020301;4231"
-set -gx NNN_TERMINAL "foot"
+set -gx NNN_TERMINAL foot
 
 # source  /opt/miniconda3/etc/fish/conf.d/conda.fish
 

@@ -63,4 +63,4 @@ SETUVAR fish_pager_color_selected_background:\x1d
 SETUVAR fish_pager_color_selected_completion:\x1d
 SETUVAR fish_pager_color_selected_description:\x1d
 SETUVAR fish_pager_color_selected_prefix:\x1d
-SETUVAR fish_user_paths:/home/eric/\x2enix\x2dprofile/bin\x1e/home/eric/\x2eemacs\x2ed/bin\x1e/home/eric/\x2elocal/bin\x1e/home/eric/\x2elocal/share/pnpm\x1e/home/eric/\x2espicetify\x1e/opt/rocm/bin\x1e/home/eric/\x2ebun/bin\x1e/usr/bin\x1e/usr/sbin\x1e/usr/local/bin\x1e/usr/local/sbin
+SETUVAR fish_user_paths:/home/eric/\x2elocal/share/cargo/bin\x1e/home/eric/\x2elocal/share/dotnet/\x2edotnet/tools\x1e/home/eric/\x2econfig/emacs/bin\x1e/home/eric/\x2enix\x2dprofile/bin\x1e/home/eric/\x2eemacs\x2ed/bin\x1e/home/eric/\x2elocal/bin\x1e/home/eric/\x2elocal/share/pnpm\x1e/home/eric/\x2espicetify\x1e/opt/rocm/bin\x1e/home/eric/\x2ebun/bin\x1e/usr/bin\x1e/usr/sbin\x1e/usr/local/bin\x1e/usr/local/sbin
