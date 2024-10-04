@@ -1,0 +1,447 @@
+{
+  "group/tray-group": {
+    "orientation": "horizontal",
+    "modules": [
+      "tray",
+      "gamemode"
+      // "keyboard-state",
+    ]
+  },
+  "group/mpdris": {
+    "orientation": "horizontal",
+    "modules": [
+      "mpris"
+    ]
+  },
+  "group/visualisation": {
+    "orientation": "horizontal",
+    // "drawer": {
+    //   "transition-duration": 500,
+    //   "children-class": "visualiser",
+    //   "transition-left-to-right": true
+    // },
+    "modules": [
+      "cava",
+      "group/mpdris"
+    ]
+  },
+  "group/hardware": {
+    "orientation": "horizontal",
+    "drawer": {
+      "transition-duration": 500,
+      "children-class": "not-power",
+      "transition-left-to-right": false
+    },
+    "modules": ["temperature", "memory", "cpu", "temperature#amdgpu"]
+  },
+  "group/rightmost": {
+    "orientation": "horizontal",
+    "modules": [
+      "custom/notification",
+      "custom/updates",
+      "clock"
+      // "custom/logo"
+    ]
+  },
+  "hyprland/workspaces": {
+    "active-only": false,
+    "disable-scroll": true,
+    "all-outputs": false,
+    "format": "{icon}",
+    "sort-by-number": true,
+    "format-icons": {
+      "1": " ",
+      "2": " ",
+      "3": " ",
+      "4": " ",
+      "5": " ",
+      "6": " ",
+      "7": " ",
+      "8": " ",
+      "default": ""
+    }
+    // "persistent-workspaces": {
+    //   "*": 4,
+    //   "DP-1": [1, 2, 3, 4],
+    //   "HDMI-A-1": [5, 6, 7, 8]
+    // }
+  },
+  "sway/workspaces#sway": {
+    "current-only": false,
+    "disable-scroll": true,
+    "all-outputs": false,
+    "format": "{name}: {icon}",
+    "numeric-first": true,
+    "format-icons": {
+      "1": " ",
+      "2": " ",
+      "3": " ",
+      "4": " ",
+      "5": " ",
+      "6": " ",
+      "7": " ",
+      "8": " ",
+      "9": " ",
+      "default": " "
+    }
+    // "persistent-workspaces": {
+    //   "1": ["DP-1"],
+    //   "2": ["DP-1"],
+    //   "3": ["DP-1"],
+    //   "4": ["DP-1"],
+    //   "5": ["DP-1"],
+    //   "6": ["HDMI-A-1"],
+    //   "7": ["HDMI-A-1"],
+    //   "8": ["HDMI-A-1"],
+    //   "9": ["HDMI-A-1"],
+    //   "10": ["HDMI-A-1"]
+    // }
+  },
+  "river/tags": {
+    "num-tags": 8,
+    "set-tags": [
+      // 00000001
+      2147483649,
+
+      // 00000010
+      2147483650,
+
+      // 00000100
+      2147483652,
+
+      // 00001000
+      2147483656,
+
+      // 00010000
+      2147483664,
+
+      // 00100000
+      2147483680,
+
+      // 01000000
+      2147483712,
+
+      // 10000000
+      2147483776
+    ],
+    "tag-labels": [" ", " ", " ", " ", " ", " ", " ", " "]
+  },
+  "river/layout": {
+    "format": "{}",
+    "min-length": 4,
+    "align": "right"
+  },
+  "custom/workspaces": {
+    "exec": "$HOME/.config/waybar/modules/workspaces.nu \"$WAYBAR_OUTPUT_NAME\""
+  },
+  "wlr/taskbar": {
+    "all-outputs": true,
+    "format": "{icon}",
+    "icon-size": 24,
+    "icon-theme": "Papirus-Dark",
+    "active-first": false,
+    "tooltip-format": "{title} [{app_id}]",
+    "on-click": "activate",
+    "on-click-middle": "close",
+    "ignore-list": [],
+    "app_ids-mapping": {
+      "firefoxdeveloperedition": "firefox-developer-edition"
+    }
+  },
+  "tray": {
+    "icon-size": 12,
+    "spacing": 10
+  },
+  "custom/media": {
+    "format": "{icon} {}",
+    "max-length": 40,
+    "escape": true,
+    "exec": "$HOME/.config/waybar/modules/mpris/scroll_status.sh NOBAR",
+    "on-click": "playerctl play-pause",
+    "on-click-middle": "playerctl previous",
+    "on-click-right": "playerctl next"
+  },
+  "mpd": {
+    "format": "{stateIcon} {consumeIcon}{randomIcon}{repeatIcon}{singleIcon}{artist} - {album} - {title} ({elapsedTime:%M:%S}/{totalTime:%M:%S})",
+    "format-disconnected": "Disconnected",
+    "format-stopped": "{consumeIcon}{randomIcon}{repeatIcon}{singleIcon} Stopped",
+    "interval": 10,
+    "consume-icons": {
+      "on": " " // Icon shows only when "consume" is on
+    },
+    "random-icons": {
+      "off": "<span color=\"#f53c3c\"></span> ", // Icon grayed out when "random" is off
+      "on": " "
+    },
+    "repeat-icons": {
+      "on": " "
+    },
+    "single-icons": {
+      "on": "1 "
+    },
+    "state-icons": {
+      "paused": "",
+      "playing": ""
+    },
+    "tooltip-format": "MPD (connected)",
+    "tooltip-format-disconnected": "MPD (disconnected)"
+  },
+  "mpris": {
+    "markup": true,
+    "interval": 10,
+    // "format": "{player_icon} <span>{title}</span> - <span>{artist}</span>\n<i>{album}</i>",
+    // "format-paused": "{player_icon} <span>{title}</span> - <span>{artist}</span>\n<i>{album}</i>",
+    "format": "{player_icon} <span>{title}</span>\n{artist} <i>{album}</i>",
+    // "format": "{player_icon} {dynamic}",
+    // "format-paused": "{status_icon} <i>{dynamic}</i>",
+    "title-len": 60,
+    "dynamic-len": 60,
+    "player-icons": {
+      "default": " ",
+      "mpv": "  ",
+      "plasma-browser-integration": "  ",
+      "firefox": "  ",
+      "spotify": "  "
+    },
+    "status-icons": {
+      "paused": "▶"
+    }
+    // "ignored-players": ["firefox"]
+  },
+  "memory": {
+    "interval": 30,
+    "format": "  {used:0.1f}G/{total:0.1f}G"
+  },
+  "cpu": {
+    "interval": 10,
+    "max-length": 16,
+    // "format": "  {}%",
+    "format": "{icon0}{icon1}{icon2}{icon3}{icon4}{icon5}{icon6}{icon7}{icon8}{icon9}{icon10}{icon11}{icon12}{icon13}{icon14}{icon15}",
+    "format-icons": [
+      "<span color='#a6da95'>▁</span>", // green
+      "<span color='#8aadf4'>▂</span>", // blue
+      "<span color='#b7bdf8'>▃</span>", // white
+      "<span color='#b7bdf8'>▄</span>", // white
+      "<span color='#eed49f'>▅</span>", // yellow
+      "<span color='#f5a97f'>▆</span>", // yellow
+      "<span color='#ee99a0'>▇</span>", // orange
+      "<span color='#ed8796'>█</span>" // red
+    ]
+  },
+  "custom/notification": {
+    "tooltip": false,
+    "format": "{icon} ",
+    "format-icons": {
+      "notification": "󰂚",
+      "none": "",
+      "dnd-notification": "",
+      "dnd-none": "",
+      "inhibited-notification": "󰂚",
+      "inhibited-none": "",
+      "dnd-inhibited-notification": "",
+      "dnd-inhibited-none": ""
+    },
+    "return-type": "json",
+    "exec-if": "which swaync-client",
+    "exec": "swaync-client -swb",
+    "on-click-release": "swaync-client -t -sw",
+    "on-click-middle-release": "sleep 0.150 && swaync-client -d -sw",
+    "escape": true
+  },
+  "gamemode": {
+    "format": "{glyph}",
+    "format-alt": "{glyph} {count}",
+    "glyph": " ",
+    "hide-not-running": true,
+    "use-icon": true,
+    "icon-name": "input-gaming-symbolic",
+    "icon-spacing": 4,
+    "icon-size": 20,
+    "tooltip": true,
+    "tooltip-format": "Games running: {count}"
+  },
+  "clock": {
+    // "format": "{:%a %d %b %R}",
+    "format": "{:%R}",
+    "format-alt": "{:L%A %d %B, %Y (%R)}",
+    "tooltip-format": "<tt><small>{calendar}</small></tt>",
+    "calendar": {
+      "mode": "month",
+      "mode-mon-col": 3,
+      "weeks-pos": "right",
+      "on-scroll": 1,
+      "on-click-right": "mode",
+      "format": {
+        "months": "<span color='#b7bdf8'><b>{}</b></span>",
+        "days": "<span color='#cad3f5'><b>{}</b></span>",
+        "weeks": "<span color='#8bd5ca'><b>W{}</b></span>",
+        "weekdays": "<span color='#8aadf4'><b>{}</b></span>",
+        "today": "<span color='#ed8796'><b><u>{}</u></b></span>"
+      }
+    }
+  },
+  "temperature": {
+    "thermal-zone": 0,
+    "hwmon-path": "/sys/class/hwmon/hwmon3/temp1_input",
+    "critical-threshold": 80,
+    "format-critical": "{icon}",
+    "format": "{icon}",
+    "tooltip-format": "CPU: {temperatureC}°C",
+    "format-icons": [
+      "<span color='#a6da95'> ▁</span>", // green
+      "<span color='#8aadf4'> ▂</span>", // blue
+      "<span color='#b7bdf8'> ▃</span>", // white
+      "<span color='#b7bdf8'> ▄</span>", // white
+      "<span color='#eed49f'> ▅</span>", // yellow
+      "<span color='#f5a97f'> ▆</span>", // yellow
+      "<span color='#ee99a0'> ▇</span>", // orange
+      "<span color='#ed8796'> █</span>" // red
+    ]
+  },
+  "temperature#amdgpu": {
+    "thermal-zone": 0,
+    "hwmon-path": "/sys/class/hwmon/hwmon0/temp1_input",
+    "critical-threshold": 100,
+    "format-critical": "{icon}",
+    "format": "{icon}",
+    "tooltip-format": "GPU (edge): {temperatureC}°C",
+    "format-icons": [
+      "<span color='#a6da95'> ▁</span>", // green
+      "<span color='#8aadf4'> ▂</span>", // blue
+      "<span color='#b7bdf8'> ▃</span>", // white
+      "<span color='#b7bdf8'> ▄</span>", // white
+      "<span color='#eed49f'> ▅</span>", // yellow
+      "<span color='#f5a97f'> ▆</span>", // yellow
+      "<span color='#ee99a0'> ▇</span>", // orange
+      "<span color='#ed8796'> █</span>" // red
+    ]
+  },
+  "network": {
+    "format-wifi": " ",
+    "format-ethernet": "󰈀 ",
+    "format-linked": "{ifname} (No IP) ",
+    "format-disconnected": "󰤮   Disconnected ",
+    "tooltip-format-ethernet": "{ifname} | {ipaddr}/{cidr} | Down Speed: {bandwidthDownBits}, Up Speed: {bandwidthUpBits}",
+    "tooltip-format-wifi": "{ifname} | {ipaddr}/{cidr} | {essid} | Signal Strenght: {signalStrength}% | Down Speed: {bandwidthDownBits}, Up Speed: {bandwidthUpBits}",
+    "on-click": "networkmanager_dmenu"
+  },
+  "image#album-art": {
+    "exec": "~/.config/waybar/modules/mpris/album_art.sh",
+    "size": 45,
+    "interval": 30
+  },
+  "custom/updates": {
+    "interval": 120,
+    "return-type": "string",
+    "exec": "~/.config/waybar/modules/updates.sh",
+    "tooltip": false,
+    "on-click": "setsid -f foot -e paru -Syyu"
+  },
+  "custom/logo": {
+    "format": " ",
+    "tooltip": false,
+    "on-click-release": "rofi -show power-menu -modi power-menu:rofi-power-menu"
+  },
+  "wireplumber": {
+    "format": "{volume}%",
+    "format-muted": "",
+    "on-click": "helvum",
+    "max-volume": 150,
+    "scroll-step": 0.2
+  },
+  "pulseaudio": {
+    "format": "{icon}",
+    "format-bluetooth": "{icon} ",
+    "format-muted": "   ",
+    "tooltip-format": "{volume}% {format_source} {desc}",
+    "on-click": "pactl set-sink-mute @DEFAULT_SINK@ toggle",
+    "on-click-middle": "helvum",
+    "on-click-right": "pavucontrol",
+    "scroll-step": 5,
+    // "format-icons": {
+    //   "headphone": "",
+    //   "hands-free": "",
+    //   "headset": "",
+    //   "phone": "",
+    //   "portable": "",
+    //   "car": "",
+    //   "default": ["", "", ""]
+    // },
+    "format-icons": [
+      "<span color='#8aadf4'>  ▁</span>", // green
+      "<span color='#7dc4e4'>  ▂</span>", // blue
+      "<span color='#91d7e3'>  ▃</span>", // white
+      "<span color='#8bd5ca'>  ▄</span>", // white
+      "<span color='#a6da95'>  ▅</span>", // yellow
+      "<span color='#eed49f'>  ▆</span>", // yellow
+      "<span color='#f5a97f'>  ▇</span>", // orange
+      "<span color='#ed8796'>  █</span>" // red
+    ],
+    "ignored-sinks": ["Easy Effects Sink"]
+  },
+  "pulseaudio/slider": {
+    "min": 0,
+    "max": 100,
+    "orientation": "horizontal"
+  },
+  "cava": {
+    //"cava_config": "$HOME/.config/cava/config",
+    "framerate": 144,
+    "hide_on_silence": false,
+    "autosens": 1,
+    "bars": 16,
+    "lower_cutoff_freq": 50,
+    "higher_cutoff_freq": 10000,
+    "method": "pulse",
+    "source": "auto",
+    "stereo": true,
+    "reverse": false,
+    "bar_delimiter": 0,
+    "monstercat": false,
+    "waves": false,
+    "noise_reduction": 0.77,
+    "input_delay": 2,
+    "format-icons": ["▁", "▂", "▃", "▄", "▅", "▆", "▇", "█"],
+    "actions": {
+      // "on-click-right": "mode"
+    }
+  },
+  "keyboard-state": {
+    "numlock": false,
+    "capslock": true,
+    "format": {
+      "numlock": "N {icon}",
+      "capslock": "{icon}"
+    },
+    "format-icons": {
+      "locked": "",
+      "unlocked": ""
+    }
+  },
+  "hyprland/window": {
+    "format": "{title}",
+    "separate-outputs": false
+  },
+  "privacy": {
+    "icon-spacing": 4,
+    "icon-size": 18,
+    "transition-duration": 250,
+    "modules": [
+      {
+        "type": "screenshare",
+        "tooltip": true,
+        "tooltip-icon-size": 24
+      },
+      {
+        "type": "audio-out",
+        "tooltip": true,
+        "tooltip-icon-size": 24
+      },
+      {
+        "type": "audio-in",
+        "tooltip": true,
+        "tooltip-icon-size": 24
+      }
+    ]
+  }
+}

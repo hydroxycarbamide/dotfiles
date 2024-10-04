@@ -14,7 +14,7 @@ window#waybar {
 
 tooltip {
 	background: rgba(24, 25, 38, 0.95);
-	border-radius: 5px;
+	border-radius: 10px;
 	border-width: 0px;
 	border-style: solid;
 	border-color: rgb(24, 25, 38);
@@ -22,10 +22,15 @@ tooltip {
 
 .modules-left,
 .modules-center,
-.modules-right,
-#mpdris {
+.modules-right {
 	background-color: #24273a;
   margin: 2px;
+  /* padding: 2px; */
+}
+
+#workspaces,
+.modules-center box,
+.modules-right box {
   padding: 2px;
 }
 
@@ -39,7 +44,7 @@ tooltip {
 #layout,
 #custom-notification.notification
 {
-  border-radius: 5px 5px 5px 5px;
+  border-radius: 10px 10px 10px 10px;
 }
 
 #tray,
@@ -48,7 +53,7 @@ widget>label {
 }
 
 #mpdris {
-	color: #f4dbd6;
+	color: #24273a;
 }
 
 #visualisation
@@ -71,7 +76,7 @@ widget>label {
 #tags button {
 	color: #939ab7;
 	margin-right: 2px;
-	border-radius: 5px;
+	border-radius: 10px;
 }
 
 #tags button.occupied {
@@ -80,8 +85,17 @@ widget>label {
 
 #workspaces button {
 	color: #f4dbd6;
-	margin-right: 2px;
-	border-radius: 5px;
+	border-radius: 10px;
+	margin-left: 1px;
+	margin-right: 1px;
+}
+
+#workspaces button:last-child {
+	margin-right: 0px;
+}
+
+#workspaces button:first-child {
+	margin-left: 0px;
 }
 
 #workspaces button.empty,
@@ -119,7 +133,7 @@ widget>label {
 
 
 #mpris {
-	font-size: 7px;
+	font-size: 9px;
 }
 
 #custom-notification {
@@ -134,31 +148,32 @@ widget>label {
 }
 
 #taskbar button {
-	margin: 0px 2px;
 	padding-top: 2px;
 	padding-bottom: 2px;
-	padding-left: 10px;
+	padding-left: 8px;
 	padding-right: 8px;
-	border-radius: 4px;
-	background-color: #363a4f;
+	border-radius: 0px;
 	transition-duration: 150ms;
 }
 
 #taskbar button:hover {
-	background-color: #494d64;
-	border-radius: 4px;
+	background-color: #363a4f;
+}
+
+#taskbar button:last-child {
+	margin-right: 6px;
 }
 
 #taskbar button.maximized,
 #taskbar button.fullscreen {
-	border-top: 3px solid #8aadf4;
+	border-top: 1px solid #8aadf4;
 }
 
 #taskbar button.active {
-	background-color: #5b6078;
-	border-radius: 4px;
-	border-bottom: 3px solid #b7bdf8;
+	background-color: #494d64;
+	border-bottom: 2px solid #b7bdf8;
 }
+
 
 #clock {
 	color: #1e2030;
