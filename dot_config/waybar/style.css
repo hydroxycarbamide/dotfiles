@@ -21,16 +21,15 @@ tooltip {
 }
 
 .modules-left,
-.modules-center,
-.modules-right {
+window.bottom .modules-center,
+window:not(.bottom) .modules-right {
 	background-color: #24273a;
   margin: 2px;
-  /* padding: 2px; */
 }
 
-#workspaces,
-.modules-center box,
-.modules-right box {
+window:not(.bottom) .modules-left,
+.modules-center,
+.modules-right {
   padding: 2px;
 }
 

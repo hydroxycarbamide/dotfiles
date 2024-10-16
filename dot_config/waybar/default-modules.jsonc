@@ -145,7 +145,8 @@
     "on-click-middle": "close",
     "ignore-list": [],
     "app_ids-mapping": {
-      "firefoxdeveloperedition": "firefox-developer-edition"
+      "firefoxdeveloperedition": "firefox-developer-edition",
+      "zen-alpha": "firefox"
     }
   },
   "tray": {
@@ -335,7 +336,7 @@
     "return-type": "string",
     "exec": "~/.config/waybar/modules/updates.sh",
     "tooltip": false,
-    "on-click": "setsid -f foot -e paru -Syyu"
+    "on-click": "setsid -f foot -e paru -Syyu && flatpak update --noninteractive"
   },
   "custom/logo": {
     "format": " ",
