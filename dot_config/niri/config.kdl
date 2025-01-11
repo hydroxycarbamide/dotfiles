@@ -54,7 +54,7 @@ input {
         // Set the name of the output (see below) which the tablet will map to.
         // If this is unset or the output doesn't exist, the tablet maps to one of the
         // existing outputs.
-        map-to-output "eDP-1"
+        map-to-output "DP-1"
     }
 
     touch {
@@ -138,6 +138,9 @@ layout {
     // If you don't like that, you should uncomment `prefer-no-csd` below.
     // Niri will draw focus ring and border *around* windows that agree to omit their
     // client-side decorations.
+    //
+    // Alternatively, you can override it with a window rule called
+    // `draw-border-with-background`.
 
     // You can change how the focus ring looks.
     focus-ring {
@@ -153,6 +156,7 @@ layout {
         // - CSS-like notation: "rgb(255, 127, 0)", rgba(), hsl() and a few others.
 
         // Color of the ring on the active monitor.
+        // active-color "#f4dbd6"
         active-color "#f4dbd6"
 
         // Color of the ring on inactive monitors.
@@ -204,19 +208,20 @@ layout {
     }
 
     // You can also customize the heights that "switch-preset-window-height" (Mod+Shift+R) toggles between.
-    // preset-window-heights {
-    //     proportion 0.5
-    //     proportion 1.0
-    // }
+    preset-window-heights {
+        proportion 0.33333
+        proportion 0.5
+        proportion 1.0
+    }
 
     // You can change the default width of the new windows.
-    // default-column-width { proportion 0.66667; }
+    default-column-width { proportion 0.5; }
 
     // If you leave the brackets empty, the windows themselves will decide their initial width.
-    default-column-width {}
+    // default-column-width {}
 
     // Set gaps around windows in logical pixels.
-    gaps 16
+    gaps 8
 
     // Struts shrink the area occupied by windows, similarly to layer-shell panels.
     // You can think of them as a kind of outer gaps. They are set in logical pixels.
@@ -224,10 +229,10 @@ layout {
     // Top and bottom struts will simply add outer gaps in addition to the area occupied by
     // layer-shell panels and regular gaps.
     struts {
-        // left 64
-        // right 64
-        // top 64
-        // bottom 64
+        // left 8
+        // right 8
+        // top 8
+        // bottom 8
     }
 
     // When to center a column when changing focus, options are:
@@ -353,6 +358,18 @@ animations {
     }
 }
 
+// workspace "browser" {
+//     open-on-output "PNP(AOC) 24B1W1 GXMKCHA055059"
+// }
+// 
+// workspace "gaming" {
+//     open-on-output "ViewSonic Corporation XG2405 W9Q210300133"
+// }
+// 
+// workspace "syncplay" {
+//     open-on-output "PNP(AOC) 24B1W1 GXMKCHA055059"
+// }
+
 // Window rules let you adjust behavior for individual windows.
 // They are processed in order of appearance in this file.
 // (This example rule is commented out with a "/-" in front.)
@@ -403,16 +420,25 @@ window-rule {
     match app-id="zenlesszonezero.exe"
     match app-id="osu!"
     match app-id="Minecraft*"
+    match app-id="GhostOfTsushima*"
+    match app-id="SamabakeScramble*"
+    match app-id="samabakescramble*"
+    match app-id="gamescope"
+    match app-id="steam"
 
     variable-refresh-rate true
     open-on-output "DP-1"
+    // open-on-workspace "browser"
     open-maximized true
     open-fullscreen true
 }
 
 window-rule {
-    match app-id="firefox"
-    open-maximized true
+    match app-id="syncplay"
+    match app-id="mpv"
+    match app-id="discord"
+
+    // open-on-workspace "syncplay"
 }
 
 window-rule {
@@ -454,7 +480,9 @@ binds {
 
     // Suggested binds for running programs: terminal, app launcher, screen locker.
     Mod+Return { spawn "footclient"; }
-    Mod+D { spawn "rofi" "-show" "drun" "-theme" "catppuccin-macchiato"; }
+    Mod+B { spawn "killall" "-SIGUSR1" "waybar"; }
+    // Mod+D { spawn "wofi" "-show" "drun" "-theme" "catppuccin-macchiato"; }
+    Mod+D { spawn "anyrun"; }
     Mod+W { spawn "rofi" "-show" "window" "-theme" "catppuccin-macchiato"; }
     Mod+Q repeat=false { spawn "wlogout" "-p" "layer-shell"; }
 
@@ -633,6 +661,9 @@ binds {
     // Alternatively, there are commands to move just a single window:
     // Mod+Ctrl+1 { move-window-to-workspace 1; }
 
+    // Switches focus between the current and the previous workspace.
+    Mod+Tab { focus-workspace-previous; }
+
     // Mod+Shift+BracketLeft  { consume-window-into-column; }
     // Mod+Shift+BracketRight { expel-window-from-column; }
 
@@ -665,13 +696,17 @@ binds {
     Mod+Shift+Minus { set-window-height "-10%"; }
     Mod+Shift+Equal { set-window-height "+10%"; }
 
+    // Move the focused window between the floating and the tiling layout.
+    Mod+Space       { toggle-window-floating; }
+    Mod+Shift+Space { switch-focus-between-floating-and-tiling; }
+
     // Actions to switch layouts.
     // Note: if you uncomment these, make sure you do NOT have
     // a matching layout switch hotkey configured in xkb options above.
     // Having both at once on the same hotkey will break the switching,
     // since it will switch twice upon pressing the hotkey (once by xkb, once by niri).
-    Mod+Space       { switch-layout "next"; }
-    Mod+Shift+Space { switch-layout "prev"; }
+    // Mod+Space       { switch-layout "next"; }
+    // Mod+Shift+Space { switch-layout "prev"; }
 
     Print { screenshot; }
     Mod+Shift+S { screenshot; }
@@ -686,7 +721,7 @@ binds {
     // Mod+Shift+E { quit skip-confirmation=true; }
     Mod+Shift+Q { quit; }
 
-    // Mod+Shift+P { power-off-monitors; }
+    Mod+Shift+P { power-off-monitors; }
 
     // This debug bind will tint all surfaces green, unless they are being
     // directly scanned out. It's therefore useful to check if direct scanout
@@ -715,7 +750,7 @@ debug {
     disable-cursor-plane
 
     // Override the DRM device that niri will use for all rendering.
-    render-drm-device "/dev/dri/renderD128"
+    // render-drm-device "/dev/dri/renderD128"
 
     // Enable the color-transformations capability of the Smithay renderer.
     // May cause a slight decrease in rendering performance.
@@ -735,14 +770,16 @@ spawn-at-startup "hyprpaper"
 spawn-at-startup "swaync"
 spawn-at-startup "waybar"
 spawn-at-startup "systemctl" "start" "--user" "foot-server"
-spawn-at-startup "systemctl" "start" "--user" "sunshine"
 spawn-at-startup "systemctl" "start" "--user" "xwayland-satellite"
 // spawn-at-startup "systemctl" "start" "--user" "gammastep"
 spawn-at-startup "/usr/lib/polkit-kde-authentication-agent-1"
-spawn-at-startup "/usr/lib/kdeconnectd"
+spawn-at-startup "kdeconnectd"
 spawn-at-startup "kdeconnect-indicator"
 spawn-at-startup "wl-paste" "--type" "text" "--watch" "cliphist" "store"
 spawn-at-startup "wl-paste" "--type" "image" "--watch" "cliphist" "store"
 spawn-at-startup "swayosd-server"
 spawn-at-startup "swayidle" "before-sleep" "'loginctl lock-session'" "lock" "'swaylock'"
+// spawn-at-startup "sunshine"
+spawn-at-startup "systemctl" "restart" "--user" "sunshine"
+// spawn-at-startup "trackma"
 // spawn-at-startup "xwayland-satellite"
