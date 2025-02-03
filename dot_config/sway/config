@@ -111,7 +111,8 @@ floating_modifier $mod normal
 bindsym $mod+Shift+r reload
 
 # Exit sway (logs you out of your Wayland session)
-bindsym $mod+q exec rofi -show power-menu -modi power-menu:rofi-power-menu
+# bindsym $mod+q exec rofi -show power-menu -modi power-menu:rofi-power-menu
+bindsym $mod+q exec wlogout -p layer-shell
 bindsym $mod+Shift+q exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'
 
 bindsym $mod+$left focus left
@@ -409,7 +410,7 @@ set $ws1ids "footclient|kitty|foot"
 for_window [app_id=$ws1ids] workspace $ws1
 assign [app_id=$ws1ids] $ws1
 
-set $ws2ids "LibreWolf|firefox"
+set $ws2ids "LibreWolf|firefox|zen"
 for_window [app_id=$ws2ids] workspace $ws2
 assign [app_id=$ws2ids] $ws2
 
