@@ -1,30 +1,6 @@
-
-###########
-# Variables
-###########
-
-# Logo key. Use Mod1 for Alt.
-set $mod Mod4
-set $left h
-set $down j
-set $up k
-set $right l
-set $term footclient
-
-# set $menu dmenu_path | dmenu | xargs swaymsg exec --
-set $menu rofi -show drun -theme catppuccin-macchiato
-# set $menu tofi-run | xargs swaymsg exec --
-
 ######################
 # Output configuration
 ######################
-# Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
-# output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
-#
-# Example configuration:
-#
-#   output HDMI-A-1 resolution 1920x1080 position 1920,0
-#
 # You can get the names of your outputs by running: swaymsg -t get_outputs
 
 output * bg /home/eric/Pictures/wallpapers/ayaka.png fill
@@ -40,310 +16,59 @@ output HDMI-A-1 {
   adaptive_sync off
 }
 
-### Idle configuration
-#
-# Example configuration:
-#
-# exec swayidle -w \
-#          timeout 300 'swaylock -f -c 000000' \
-#          timeout 600 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
-#          before-sleep 'swaylock -f -c 000000'
-#
-# This will lock your screen after 300 seconds of inactivity, then turn off
-# your displays after another 300 seconds, and turn your screens back on when
-# resumed. It will also lock your screen before your computer goes to sleep.
-
 #####################
 # Input configuration
 #####################
-
-# Example configuration:
-#
-#   input "2:14:SynPS/2_Synaptics_TouchPad" {
-#       dwt enabled
-#       tap enabled
-#       natural_scroll enabled
-#       middle_emulation enabled
-#   }
 
 input * {
     xkb_layout "us"
     xkb_variant ""
     xkb_options "compose:ralt"
+    repeat_delay 200
+    repeat_rate 50
 }
 
-input "13159:6403:EndGameGear_XM1_Gaming_Mouse" accel_profile "flat"
+input type:touchpad {
+    accel_profile "flat"
+    natural_scroll enabled
+    tap enabled
+    dwt enabled
+}
 
-input * repeat_delay 200
-input * repeat_rate 50
-
-#
-# You can get the names of your inputs by running: swaymsg -t get_inputs
-# Read `man 5 sway-input` for more information about this section.
-
-### Key bindings
-#
-# Basics:
-#
-# Start a terminal
-bindsym $mod+Return exec $term
-
-# Kill focused window
-bindsym $mod+c kill
-
-# Start your launcher
-bindsym $mod+d exec $menu
-bindsym $mod+w exec rofi -show window -theme catppuccin-macchiato
-
-bindsym $mod+Shift+s exec grim -g "$(slurp)" - | wl-copy
-bindsym $mod+Control+Shift+s exec grim -g "$(slurp)" /tmp/grim.png && tesseract -l eng+jpn /tmp/grim.png - | wl-copy && wl-paste | xargs -I{} notify-send "Tesseract" "Copied '{}'"
-bindsym $mod+P exec grim -g "$(slurp -o)" - | wl-copy
-bindsym $mod+Shift+P exec grim - | wl-copy
-
-# Drag floating windows by holding down $mod and left mouse button.
-# Resize them with right mouse button + $mod.
-# Despite the name, also works for non-floating windows.
-# Change normal to inverse to use left mouse button for resizing and right
-# mouse button for dragging.
-floating_modifier $mod normal
-
-# Reload the configuration file
-bindsym $mod+Shift+r reload
-
-# Exit sway (logs you out of your Wayland session)
-# bindsym $mod+q exec rofi -show power-menu -modi power-menu:rofi-power-menu
-bindsym $mod+q exec wlogout -p layer-shell
-bindsym $mod+Shift+q exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'
-
-bindsym $mod+$left focus left
-bindsym $mod+$down focus down
-bindsym $mod+$up focus up
-bindsym $mod+$right focus right
-bindsym $mod+Left focus left
-bindsym $mod+Down focus down
-bindsym $mod+Up focus up
-bindsym $mod+Right focus right
-
-bindsym $mod+Shift+$left move left
-bindsym $mod+Shift+$down move down
-bindsym $mod+Shift+$up move up
-bindsym $mod+Shift+$right move right
-bindsym $mod+Shift+Left move left
-bindsym $mod+Shift+Down move down
-bindsym $mod+Shift+Up move up
-bindsym $mod+Shift+Right move right
+input type:pointer {
+    accel_profile "flat"
+}
 
 #############
 # Workspaces
 #############
-set $ws1 1
-set $ws2 2
-set $ws3 3
-set $ws4 4
-set $ws5 5
-set $ws6 6
-set $ws7 7
-set $ws8 8
-set $ws9 9
-set $ws10 10
 
-workspace $ws1 output  DP-1
-workspace $ws2 output  DP-1
-workspace $ws3 output  DP-1
-workspace $ws4 output  DP-1
-workspace $ws5 output  DP-1
-workspace $ws6 output  HDMI-A-1
-workspace $ws7 output  HDMI-A-1
-workspace $ws8 output  HDMI-A-1
-workspace $ws9 output  HDMI-A-1
-workspace $ws10 output HDMI-A-1
+set {
+  $ws1 1
+  $ws2 2
+  $ws3 3
+  $ws4 4
+  $ws5 5
+  $ws6 6
+  $ws7 7
+  $ws8 8
+  $ws9 9
+  $ws10 10
+}
 
-# Switch to workspace
-# bindsym $mod+1 workspace number $ws1
-# bindsym $mod+2 workspace number $ws2
-# bindsym $mod+3 workspace number $ws3
-# bindsym $mod+4 workspace number $ws4
-# bindsym $mod+5 workspace number $ws5
-# bindsym $mod+6 workspace number $ws6
-# bindsym $mod+7 workspace number $ws7
-# bindsym $mod+8 workspace number $ws8
-# bindsym $mod+9 workspace number $ws9
-# bindsym $mod+0 workspace number $ws10
+workspace {
+  $ws1 output  DP-1
+  $ws2 output  DP-1
+  $ws3 output  DP-1
+  $ws4 output  DP-1
+  $ws5 output  DP-1
+  $ws6 output  HDMI-A-1
+  $ws7 output  HDMI-A-1
+  $ws8 output  HDMI-A-1
+  $ws9 output  HDMI-A-1
+  $ws10 output HDMI-A-1
+}
 
-bindsym --no-repeat $mod+1 workspace number $ws1; exec "echo 1 > /tmp/sovpipe"
-bindsym --no-repeat $mod+2 workspace number $ws2; exec "echo 1 > /tmp/sovpipe"
-bindsym --no-repeat $mod+3 workspace number $ws3; exec "echo 1 > /tmp/sovpipe"
-bindsym --no-repeat $mod+4 workspace number $ws4; exec "echo 1 > /tmp/sovpipe"
-bindsym --no-repeat $mod+5 workspace number $ws5; exec "echo 1 > /tmp/sovpipe"
-bindsym --no-repeat $mod+6 workspace number $ws6; exec "echo 1 > /tmp/sovpipe"
-bindsym --no-repeat $mod+7 workspace number $ws7; exec "echo 1 > /tmp/sovpipe"
-bindsym --no-repeat $mod+8 workspace number $ws8; exec "echo 1 > /tmp/sovpipe"
-bindsym --no-repeat $mod+9 workspace number $ws9; exec "echo 1 > /tmp/sovpipe"
-bindsym --no-repeat $mod+0 workspace number $ws10; exec "echo 1 > /tmp/sovpipe"
-     
-bindsym --release $mod+1 exec "echo 0 > /tmp/sovpipe"
-bindsym --release $mod+2 exec "echo 0 > /tmp/sovpipe"
-bindsym --release $mod+3 exec "echo 0 > /tmp/sovpipe"
-bindsym --release $mod+4 exec "echo 0 > /tmp/sovpipe"
-bindsym --release $mod+5 exec "echo 0 > /tmp/sovpipe"
-bindsym --release $mod+6 exec "echo 0 > /tmp/sovpipe"
-bindsym --release $mod+7 exec "echo 0 > /tmp/sovpipe"
-bindsym --release $mod+8 exec "echo 0 > /tmp/sovpipe"
-bindsym --release $mod+9 exec "echo 0 > /tmp/sovpipe"
-bindsym --release $mod+0 exec "echo 0 > /tmp/sovpipe"
-
-# Move focused container to workspace
-bindsym $mod+Shift+1 move container to workspace $ws1
-bindsym $mod+Shift+2 move container to workspace $ws2
-bindsym $mod+Shift+3 move container to workspace $ws3
-bindsym $mod+Shift+4 move container to workspace $ws4
-bindsym $mod+Shift+5 move container to workspace $ws5
-bindsym $mod+Shift+6 move container to workspace $ws6
-bindsym $mod+Shift+7 move container to workspace $ws7
-bindsym $mod+Shift+8 move container to workspace $ws8
-bindsym $mod+Shift+9 move container to workspace $ws9
-bindsym $mod+Shift+0 move container to workspace $ws10
-
-bindsym $mod+Tab focus output right
-bindsym $mod+Shift+Tab move workspace to output right
-bindsym $mod+Control+Shift+Right move workspace to output right
-bindsym $mod+Control+Shift+Left move workspace to output left
-bindsym $mod+Control+Shift+Down move workspace to output down
-bindsym $mod+Control+Shift+Up move workspace to output up
-
-bindsym $mod+comma focus output left
-bindsym $mod+period focus output right
-bindsym $mod+Shift+comma move container to output left
-bindsym $mod+Shift+period move container to output right
-
-##############
-# Layout stuff
-##############
-
-# You can "split" the current object of your focus with
-# $mod+b or $mod+v, for horizontal and vertical splits
-# respectively.
-# bindsym $mod+b splith
-# bindsym $mod+v splitv
-
-# Switch the current container between different layout styles
-# bindsym $mod+s layout stacking
-bindsym $mod+t layout tabbed
-bindsym $mod+s layout toggle split
-
-# Make the current focus fullscreen
-bindsym $mod+f fullscreen
-
-# Toggle the current focus between tiling and floating mode
-bindsym $mod+space floating toggle
-
-# Swap focus between the tiling area and the floating area
-bindsym $mod+Shift+space focus mode_toggle
-
-# Move focus to the parent container
-bindsym $mod+a focus parent
-
-bindsym $mod+Escape focus next
-
-# focus_wrapping workspace
-
-############
-# Scratchpad
-############
-
-# Move the currently focused window to the scratchpad
-bindsym $mod+Shift+minus move scratchpad
-
-# Show the next scratchpad window or hide the focused scratchpad window.
-# If there are multiple scratchpad windows, this command cycles through them.
-bindsym $mod+minus scratchpad show
-
-##############
-# Applications
-##############
-
-bindsym $mod+Shift+e exec xdg-open $HOME
-# bindsym $mod+e exec kitty --class="fm-term" nnn -da -P p
-bindsym $mod+e exec footclient -a fm-term yazi
-bindsym $mod+v exec cliphist list | rofi -dmenu | cliphist decode | wl-copy
-
-########
-# Volume
-########
-
-bindsym XF86AudioRaiseVolume exec swayosd-client --output-volume raise
-bindsym XF86AudioLowerVolume exec swayosd-client --output-volume lower
-bindsym XF86AudioMute exec swayosd-client --output-volume mute-toggle
-
-#####################
-# Resizing containers
-#####################
-
-# mode "resize" {
-#     bindsym $left resize shrink width 10px
-#     bindsym $down resize grow height 10px
-#     bindsym $up resize shrink height 10px
-#     bindsym $right resize grow width 10px
-#     bindsym Left resize shrink width 10px
-#     bindsym Down resize grow height 10px
-#     bindsym Up resize shrink height 10px
-#     bindsym Right resize grow width 10px
-# 
-#     # Return to default mode
-#     bindsym Return mode "default"
-#     bindsym Escape mode "default"
-# }
-# bindsym $mod+r mode "resize"
-
-bindsym $mod+Control+$left resize shrink width 10px
-bindsym $mod+Control+$down resize grow height 10px
-bindsym $mod+Control+$up resize shrink height 10px
-bindsym $mod+Control+$right resize grow width 10px
-bindsym $mod+Control+Left resize shrink width 10px
-bindsym $mod+Control+Down resize grow height 10px
-bindsym $mod+Control+Up resize shrink height 10px
-bindsym $mod+Control+Right resize grow width 10px
-
-############
-# Catppuccin
-############
-
-set $rosewater #f4dbd6
-set $flamingo  #f0c6c6
-set $pink      #f5bde6
-set $mauve     #c6a0f6
-set $red       #ed8796
-set $maroon    #ee99a0
-set $peach     #f5a97f
-set $green     #a6da95
-set $teal      #8bd5ca
-set $sky       #91d7e3
-set $sapphire  #7dc4e4
-set $blue      #8aadf4
-set $lavender  #b7bdf8
-set $text      #cad3f5
-set $subtext1  #b8c0e0
-set $subtext0  #a5adcb
-set $overlay2  #939ab7
-set $overlay1  #8087a2
-set $overlay0  #6e738d
-set $surface2  #5b6078
-set $surface1  #494d64
-set $surface0  #363a4f
-set $base      #24273a
-set $mantle    #1e2030
-set $crust     #181926
-set $base_alpha #f4dbd600
-set $invisible #00000000
-
-# target                 title     bg    text   indicator  border
-client.focused           $rosewater $base $text  $rosewater $rosewater
-client.focused_tab_title $rosewater $base $text  $rosewater $rosewater
-client.focused_inactive  $overlay0 $base $text  $base_alpha $base_alpha
-client.unfocused         $overlay0 $base $text  $base_alpha $base_alpha
-client.urgent            $peach    $base $peach $peach  $peach
-client.placeholder       $overlay0 $base $text  $overlay0  $base
-client.background        $base
 
 
 ###########
@@ -402,62 +127,85 @@ seat seat0 xcursor_theme $my_cursor $my_cursor_size
 
 # include
 
-include /etc/sway/config.d/*
+include binds.sway
+include catppuccin-macchiato.sway
 
 # Assigns
 
-set $ws1ids "footclient|kitty|foot"
-for_window [app_id=$ws1ids] workspace $ws1
-assign [app_id=$ws1ids] $ws1
+set {
+  $ws1ids "footclient|kitty|foot"
+  $ws2ids "LibreWolf|firefox|zen"
+  $ws3ids "org.gnome.Nautilus|fm-term|org.qbittorrent.qBittorrent"
+  $ws4ids "com.usebottles.bottles"
+  $ws5ids "org.remmina.Remmina"
+  $ws6ids "io.github.celluloid_player.Celluloid|mpv"
+  $ws7ids "a"
 
-set $ws2ids "LibreWolf|firefox|zen"
-for_window [app_id=$ws2ids] workspace $ws2
-assign [app_id=$ws2ids] $ws2
+  $ws1classes "a"
+  $ws2classes "a"
+  $ws3classes "a"
+  $ws4classes "cs2"
+  $ws5classes "a"
+  $ws6classes "mpv|Spotify"
+  $ws7classes "discord|vesktop|teams-for-linux|Microsoft Teams - Preview"
+}
 
+assign {
+  [app_id=$ws1ids] $ws1
+  [app_id=$ws2ids] $ws2
+  [app_id=$ws3ids] $ws3
+  [app_id=$ws4ids] $ws4
+  [app_id=$ws5ids] $ws5
+  [app_id=$ws6ids] $ws6
+  [app_id=$ws7ids] $ws7
+  
+  [class=$ws1classes] $ws1
+  [class=$ws2classes] $ws2
+  [class=$ws3classes] $ws3
+  [class=$ws4classes] $ws4
+  [class=$ws5classes] $ws5
+  [class=$ws6classes] $ws6
+  [class=$ws7classes] $ws7
+}
 
-set $ws3ids "org.gnome.Nautilus|fm-term|org.qbittorrent.qBittorrent"
-for_window [app_id=$ws3ids] workspace $ws3
-assign [app_id=$ws3ids] $ws3
+for_window {
+  [app_id=$ws1ids] workspace $ws1
+  [app_id=$ws2ids] workspace $ws2
+  [app_id=$ws3ids] workspace $ws3
+  [app_id=$ws4ids] workspace $ws4
+  [app_id=$ws5ids] workspace $ws5
+  [app_id=$ws6ids] workspace $ws6
+  [app_id=$ws7ids] workspace $ws7
 
-set $ws4ids "com.usebottles.bottles"
-set $ws4classes "cs2"
-for_window [app_id=$ws4ids] workspace $ws4
-for_window [class=$ws4classes] workspace $ws4
-assign [app_id=$ws4ids] $ws4
-assign [class=$ws4classes] $ws4
-
-set $ws5ids "org.remmina.Remmina"
-for_window [app_id=$ws5ids] workspace $ws5
-assign [app_id=$ws5ids] $ws5
-
-set $ws6ids "io.github.celluloid_player.Celluloid|mpv"
-set $ws6classes "mpv|Spotify"
-for_window [app_id=$ws6ids] workspace $ws6
-for_window [class=$ws6classes] workspace $ws6
-assign [app_id=$ws6ids] $ws6
-assign [class=$ws6classes] $ws6
-
-set $ws7classes "discord|vesktop|teams-for-linux|Microsoft Teams - Preview"
-for_window [class=$ws7classes] workspace $ws7
-assign [class=$ws7classes] $ws7
+  [class=$ws1classes] workspace $ws1
+  [class=$ws2classes] workspace $ws2
+  [class=$ws3classes] workspace $ws3
+  [class=$ws4classes] workspace $ws4
+  [class=$ws5classes] workspace $ws5
+  [class=$ws6classes] workspace $ws6
+  [class=$ws7classes] workspace $ws7
+}
 
 # Autostart
 
-exec_always "~/.config/sway/scripts/vrr_fullscreen.sh"
-exec waybar &
-exec swaync &
-exec swayosd-server &
-exec /usr/lib/kdeconnectd &
-exec kdeconnect-indicator &
-exec_always autotiling
-# exec flatpak run me.kozec.syncthingtk -m &
-exec systemctl start --user foot-server
-exec systemctl start --user sunshine
-exec wl-paste --type text --watch cliphist store
-exec wl-paste --type image --watch cliphist store
-exec swayidle before-sleep 'loginctl lock-session' lock 'swaylock'
-# exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
-exec /usr/lib/polkit-kde-authentication-agent-1 &
-exec rm -f /tmp/sovpipe && mkfifo /tmp/sovpipe && tail -f /tmp/sovpipe | sov -t 200 -n -c 1 -s $HOME/.config/sov
-exec nm-applet
-exec dbus-update-activation-environment DISPLAY XAUTHORITY WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
+exec_always {
+  "~/.config/sway/scripts/vrr_fullscreen.sh"
+  autotiling
+}
+
+exec {
+  waybar &
+  swaync &
+  swayosd-server &
+  /usr/lib/kdeconnectd &
+  kdeconnect-indicator &
+  systemctl start --user foot-server
+  systemctl start --user sunshine
+  wl-paste --type text --watch cliphist store
+  wl-paste --type image --watch cliphist store
+  swayidle before-sleep 'loginctl lock-session' lock 'swaylock'
+  /usr/lib/polkit-kde-authentication-agent-1 &
+  rm -f /tmp/sovpipe && mkfifo /tmp/sovpipe && tail -f /tmp/sovpipe | sov -t 200 -n -c 1 -s $HOME/.config/sov
+  nm-applet
+  dbus-update-activation-environment DISPLAY XAUTHORITY WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
+}
