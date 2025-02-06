@@ -1,0 +1,48 @@
+[pyprland]
+plugins = [
+  "scratchpads",
+  "lost_windows",
+  "monitors",
+  "toggle_dpms",
+  "magnify",
+  "expose",
+  "shift_monitors",
+]
+
+[monitors.placement]
+"AOC".rightOf = "ViewSonic"
+
+[workspaces_follow_focus]
+max_workspaces = 8
+
+[expose]
+include_special = false
+
+[scratchpads.term]
+animation = "fromTop"
+command = "foot -a foot-dropterm"
+class = "foot-dropterm"
+size = "75% 60%"
+
+[scratchpads.obsidian]
+animation = "fromTop"
+command = "obsidian"
+class = "obsidian"
+size = "80% 80%"
+
+[scratchpads.logseq]
+animation = "fromTop"
+command = "flatpak run com.logseq.Logseq"
+match_by = "class"
+class = "Logseq"
+size = "80% 80%"
+# process_tracking = false
+class_match = true
+
+[scratchpads.volume]
+animation = "fromRight"
+command = "pavucontrol"
+class = "org.pulseaudio.pavucontrol"
+lazy = true
+size = "40% 90%"
+unfocus = "hide"
