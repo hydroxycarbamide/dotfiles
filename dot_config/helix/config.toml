@@ -13,7 +13,9 @@ auto-pairs = false
 [editor.whitespace.render]
 space = "all"
 tab = "all"
-newline = "none"
+nbsp = "none"
+nnbsp = "none"
+newline = "all"
 
 [editor.cursor-shape]
 insert = "bar"
@@ -39,6 +41,10 @@ C-k = "jump_view_up"
 C-l = "jump_view_right"
 "}" = "goto_next_paragraph"
 "{" = "goto_prev_paragraph"
+
+[keys.insert]
+"A-x" = "normal_mode"     # Maps Alt-X to enter normal mode
+j = { k = "normal_mode" } # Maps `jk` to exit insert mode
 
 [editor.soft-wrap]
 enable = true
