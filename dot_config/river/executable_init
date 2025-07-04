@@ -6,6 +6,8 @@
 
 # Super+Return to start an instance of foot (https://codeberg.org/dnkl/foot)
 riverctl map normal Super Return spawn footclient
+# riverctl map normal Super Return spawn "wezterm start --new-tab"
+riverctl map normal Super+Shift Return spawn "wezterm"
 
 # Super+C to close the focused view
 riverctl map normal Super C close
@@ -17,13 +19,18 @@ riverctl map normal Super+Shift Q exit
 riverctl map normal Super+Shift R spawn "$HOME/.config/river/init"
 
 # Rofi menu
-riverctl map normal Super Q spawn 'rofi -show power-menu -modi power-menu:rofi-power-menu'
+# riverctl map normal Super Q spawn 'rofi -show power-menu -modi power-menu:rofi-power-menu'
+riverctl map normal Super Q spawn 'wlogout -p layer-shell'
 
 # Super+J and Super+K to focus the next/previous view in the layout stack
 riverctl map normal Super J focus-view next
 riverctl map normal Super K focus-view previous
 riverctl map normal Super H focus-view left
 riverctl map normal Super L focus-view right
+riverctl map normal Super Down focus-view next
+riverctl map normal Super Up focus-view previous
+riverctl map normal Super Left focus-view left
+riverctl map normal Super Right focus-view right
 
 # Super+Shift+J and Super+Shift+K to swap the focused view with the next/previous
 # view in the layout stack
@@ -40,8 +47,11 @@ riverctl map normal Super Comma focus-output previous
 riverctl map normal Super+Shift Period send-to-output next
 riverctl map normal Super+Shift Comma send-to-output previous
 
+riverctl map normal Super Tab focus-output next
+riverctl map normal Super+Shift Tab send-to-output next
+
 # Super+Return to bump the focused view to the top of the layout stack
-riverctl map normal Super+Shift Return zoom
+# riverctl map normal Super+Shift Return zoom
 riverctl map normal Super X zoom
 
 # Super+H and Super+L to decrease/increase the main ratio of rivertile(1)
@@ -51,6 +61,8 @@ riverctl map normal Super+Control L send-layout-cmd rivertile "main-ratio +0.05"
 # Super+Shift+H and Super+Shift+L to increment/decrement the main count of rivertile(1)
 riverctl map normal Super+Shift+Control H send-layout-cmd rivertile "main-count +1"
 riverctl map normal Super+Shift+Control L send-layout-cmd rivertile "main-count -1"
+riverctl map normal Super bracketleft send-layout-cmd rivertile "main-count +1"
+riverctl map normal Super bracketright send-layout-cmd rivertile "main-count -1"
 
 # Super+Alt+{H,J,K,L} to move views
 riverctl map normal Super+Alt H move left 100
@@ -154,10 +166,12 @@ done
 # Applications
 ##############
 
-riverctl map normal Super D spawn "rofi -show drun -theme catppuccin-macchiato"
+#riverctl map normal Super D spawn "rofi -show drun -theme catppuccin-macchiato"
+riverctl map normal Super D spawn "anyrun"
 riverctl map normal Super W spawn "rofi -show window -theme catppuccin-macchiato"
 # riverctl map normal Super E spawn "kitty --class='fm-term' nnn -da -P p"
-riverctl map normal Super E spawn "footclient -a fm-term yazi"
+# riverctl map normal Super E spawn "footclient -a fm-term yazi"
+riverctl map normal Super E spawn "wezterm start --class fm-term yazi"
 riverctl map normal Super+Shift E spawn "xdg-open $HOME"
 
 # shellcheck disable=SC2016
@@ -192,6 +206,7 @@ rivertile -view-padding 6 -outer-padding 10 &
 #    view-padding 6, \
 #    outer-padding 10, &
 
+riverctl allow-tearing disabled
 
 
 # cursor
@@ -220,18 +235,6 @@ riverctl input *Touchpad tap enabled
 # Clipboard
 riverctl map normal Super V spawn 'bash -c "cliphist list | rofi -dmenu | cliphist decode | wl-copy"'
 
-
-##########
-# Monitors
-##########
-
-# wlr-randr
-# wlr-randr --output HDMI-A-1 --on --mode 1920x1080@60Hz --pos 1920,0 --output DP-1 --on --mode 1920x1080@144.001007Hz --pos 0,0
-
-# kanshi
-kanshi &
-
-
 #######
 # Rules
 #######
@@ -239,22 +242,17 @@ kanshi &
 # ssd
 riverctl rule-add ssd
 
-# output
-riverctl rule-add -app-id 'cs2' output DP-1
-riverctl rule-add -app-id 'starrail.exe' output DP-1
-riverctl rule-add -app-id 'genshinimpact.exe' output DP-1
-riverctl rule-add -app-id 'zenlesszonezero.exe' output DP-1
-
 # tags
 declare -a rule_sets
 
-rule_sets[1]="footclient kitty foot"
-rule_sets[2]="LibreWolf firefox"
+rule_sets[1]="footclient kitty foot org.wezfurlong.wezterm"
+rule_sets[2]="LibreWolf firefox zen*"
 rule_sets[3]="org.gnome.Nautilus fm-term org.qbittorrent.qBittorrent syncplay org.kde.dolphin org.kde.ktorrent"
-rule_sets[4]="com.usebottles.bottles cs2 osu* org.prismlauncher.PrismLauncher moe.launcher.sleepy-launcher moe.launcher.an-anime-game-launcher moe.launcher.the-honkers-railway-launcher genshinimpact.exe starrail.exe zenlesszonezero.exe Steam steam steam_app_*"
+rule_sets[4]="com.usebottles.bottles cs2 osu* org.prismlauncher.PrismLauncher moe.launcher.sleepy-launcher moe.launcher.an-anime-game-launcher moe.launcher.the-honkers-railway-launcher genshinimpact.exe starrail.exe zenlesszonezero.exe steam_app_* net.lutris.Lutris"
 rule_sets[5]="org.remmina.Remmina Code VSCodium"
 rule_sets[6]="io.github.celluloid_player.Celluloid mpv Spotify"
 rule_sets[7]="discord vesktop teams-for-linux 'Microsoft Teams - Preview'"
+rule_sets[8]="org.keepassxc.KeePassXC"
 
 for index in "${!rule_sets[@]}"; do
     tags=$((1 << (index - 1)))
@@ -264,7 +262,26 @@ for index in "${!rule_sets[@]}"; do
     done
 done
 
+riverctl rule-add -app-id "steam" tags $(( 1 << 4 - 1 ))
+riverctl rule-add -app-id "Steam" tags $(( 1 << 4 - 1 ))
+
 # tags+
+
+# output
+riverctl rule-add -app-id 'cs2' output DP-1
+riverctl rule-add -app-id 'starrail.exe' output DP-1
+riverctl rule-add -app-id 'genshinimpact.exe' output DP-1
+riverctl rule-add -app-id 'zenlesszonezero.exe' output DP-1
+
+riverctl rule-add -app-id steam output HDMI-A-1
+riverctl rule-add -app-id 'net.lutris.Lutris' output HDMI-A-1
+
+index=4
+tags=$((1 << (index - 1)))
+for element in ${rule_sets[4]}; do
+    riverctl rule-add -app-id "$element" output DP-1
+    # riverctl rule-add -app-id "$element" tearing
+done
 
 
 #########
@@ -279,13 +296,13 @@ dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
 ###########
 
 ## background
-hyprpaper --no-fractional &
+hyprpaper &
 
 ## bar
-waybar &
+systemctl --user start waybar
 
 ## notification daemon
-swaync &
+systemctl --user start swaync
 
 ## kdeconnect
 /usr/lib/kdeconnectd &
@@ -296,17 +313,21 @@ swayosd-server &
 
 ## systemctl restarts
 systemctl start --user foot-server
-systemctl start --user sunshine
+# systemctl restart --user sunshine
 # systemctl start --user gammastep.service 
+systemctl restart --user hypridle
+systemctl start --user kanshi
 
 ## cliphist
 wl-paste --type text --watch cliphist store & #Stores only text data
 wl-paste --type image --watch cliphist store & #Stores only image data
 
+## lock
+swayidle before-sleep 'loginctl lock-session' lock 'swaylock' &
+
+# passwords
+keepassxc &
+
 # polkit
 ## /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
 /usr/lib/polkit-kde-authentication-agent-1 &
-
-## lock
-swayidle before-sleep 'loginctl lock-session' lock '/home/eric/.config/hypr/bsplock' &
-

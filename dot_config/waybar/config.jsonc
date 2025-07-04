@@ -1,37 +1,22 @@
 [
   {
     "output": ["DP-1", "HDMI-A-1"],
-    "layer": "top",
-    "position": "top",
+    "layer": "bottom",
+    "position": "bottom",
     "height": 32,
     "include": ["~/.config/waybar/default-modules.jsonc"],
     "modules-left": [
+      "dwl/tags",
       "hyprland/workspaces",
       "sway/workspaces#sway",
       "niri/workspaces",
-      "river/tags"
+      "river/tags",
       // "custom/workspaces",
       // "river/layout",
 
-      // "group/visualisation"
+      "group/visualisation"
       // "custom/media",
       // "hyprland/window",
-    ],
-    "modules-right": [
-      "group/hardware",
-      "pulseaudio",
-      "network",
-      "group/rightmost"
-    ]
-  },
-  {
-    "output": ["DP-1", "HDMI-A-1"],
-    "layer": "top",
-    "position": "bottom",
-    "height": 44,
-    "include": ["~/.config/waybar/default-modules.jsonc"],
-    "modules-left": [
-      "group/visualisation"
     ],
     "modules-center": [
       "group/tray-group",
@@ -39,6 +24,12 @@
       // "mpd",
     ],
     "modules-right": [
+      "group/hardware",
+      // "pulseaudio",
+      "wireplumber",
+      // "hyprland/language",
+      "network",
+      "group/rightmost"
     ]
   }
 ]

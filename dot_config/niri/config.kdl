@@ -141,6 +141,9 @@ layout {
     //
     // Alternatively, you can override it with a window rule called
     // `draw-border-with-background`.
+    shadow {
+        on
+    }
 
     // You can change how the focus ring looks.
     focus-ring {
@@ -199,9 +202,8 @@ layout {
         // Proportion sets the width as a fraction of the output width, taking gaps into account.
         // For example, you can perfectly fit four windows sized "proportion 0.25" on an output.
         // The default preset widths are 1/3, 1/2 and 2/3 of the output.
-        proportion 0.33333
         proportion 0.5
-        proportion 0.66667
+        proportion 1.0
 
         // Fixed sets the width in logical pixels exactly.
         // fixed 1920
@@ -413,9 +415,11 @@ animations {
 /// Workspaces
 
 window-rule {
-    match app-id="steam_app_*"
+    // match app-id="steam_app_*"
     match app-id="cs2"
+    match app-id="gmod"
     match app-id="genshinimpact.exe"
+    match app-id="henpri.exe"
     match app-id="starrail.exe"
     match app-id="zenlesszonezero.exe"
     match app-id="osu!"
@@ -424,7 +428,6 @@ window-rule {
     match app-id="SamabakeScramble*"
     match app-id="samabakescramble*"
     match app-id="gamescope"
-    match app-id="steam"
 
     variable-refresh-rate true
     open-on-output "DP-1"
@@ -441,8 +444,30 @@ window-rule {
     // open-on-workspace "syncplay"
 }
 
+/// Floating rules
+
+
+window-rule {
+    match app-id="firefox$" title="^Picture-in-Picture$"
+    match app-id="floorp$" title="^Picture-in-Picture$"
+    match app-id="zen$" title="^Picture-in-Picture$"
+
+    open-floating true
+    default-floating-position x=50 y=50 relative-to="bottom-right"
+    max-height 320
+}
+window-rule {
+    // match app-id="launcher.exe$" title="^Holoearth Launcher$"
+    match app-id="launcher.exe$"
+    // match title="^Holoearth*"
+    open-floating true
+}
+
+/// Custom rules
+
 window-rule {
     match app-id="foot*"
+    match app-id=r#"^org\.wezfurlong\.wezterm$"#
     match app-id="fm-term"
     default-column-width { proportion 0.5; }
 }
@@ -463,6 +488,50 @@ window-rule {
     clip-to-geometry true
 }
 
+layer-rule {
+    match namespace="^rofi$"
+    
+    shadow {
+        on
+    }
+
+    geometry-corner-radius 10
+}
+
+window-rule {
+    match is-window-cast-target=true
+
+    focus-ring {
+        active-color "#ee99a0"
+        inactive-color "#ed8796"
+    }
+
+    border {
+        inactive-color "#ed8796"
+    }
+
+    shadow {
+        color "#7d0d2d70"
+    }
+
+    tab-indicator {
+        active-color "#ee99a0"
+        inactive-color "#ed8796"
+    }
+}
+
+/// Layer rules
+
+layer-rule {
+    match namespace="^swayosd$"
+    
+    shadow {
+        on
+    }
+
+    geometry-corner-radius 9999
+}
+
 binds {
     // Keys consist of modifiers separated by + signs, followed by an XKB key name
     // in the end. To find an XKB name for a particular key, you may use a program
@@ -480,14 +549,19 @@ binds {
 
     // Suggested binds for running programs: terminal, app launcher, screen locker.
     Mod+Return { spawn "footclient"; }
+    // Mod+Return { spawn "wezterm" "start" "--new-tab"; }
+    // Mod+Return { spawn "wezterm"; }
     Mod+B { spawn "killall" "-SIGUSR1" "waybar"; }
     // Mod+D { spawn "wofi" "-show" "drun" "-theme" "catppuccin-macchiato"; }
     Mod+D { spawn "anyrun"; }
-    Mod+W { spawn "rofi" "-show" "window" "-theme" "catppuccin-macchiato"; }
+    Mod+S { spawn "anyrun"; }
+    Mod+Shift+W { spawn "rofi" "-show" "window" "-theme" "catppuccin-macchiato"; }
+    Mod+W repeat=false { toggle-overview; }
     Mod+Q repeat=false { spawn "wlogout" "-p" "layer-shell"; }
 
     // Mod+E repeat=false { spawn "kitty" "--class='fm-term'" "nnn" "-da" "-P" "p"; }
-    Mod+E repeat=false { spawn "footclient" "-a" "fm-term" "yazi"; }
+    // Mod+E repeat=false { spawn "footclient" "-a" "fm-term" "yazi"; }
+    Mod+E repeat=false { spawn "wezterm" "start" "--class" "fm-term" "yazi"; }
     Mod+Shift+E repeat=false { spawn "xdg-open" "."; }
 
     Mod+V { spawn "bash" "-c" "cliphist list | rofi -dmenu | cliphist decode | wl-copy"; }
@@ -526,6 +600,8 @@ binds {
     Mod+Shift+J     { move-window-down; }
     Mod+Shift+K     { move-window-up; }
     Mod+Shift+L     { move-column-right; }
+
+    Mod+G { toggle-column-tabbed-display; }
 
     // Alternative commands that move across workspaces when reaching
     // the first or last window in a column.
@@ -573,11 +649,11 @@ binds {
     Mod+Page_Down      { focus-workspace-down; }
     Mod+Page_Up        { focus-workspace-up; }
     Mod+U              { focus-workspace-down; }
-    Mod+I              { focus-workspace-up; }
+    Mod+Y              { focus-workspace-up; }
     Mod+Shift+Page_Down { move-column-to-workspace-down; }
     Mod+Shift+Page_Up   { move-column-to-workspace-up; }
     Mod+Shift+U         { move-column-to-workspace-down; }
-    Mod+Shift+I         { move-column-to-workspace-up; }
+    Mod+Shift+Y         { move-column-to-workspace-up; }
 
     // Alternatively, there are commands to move just a single window:
     // Mod+Ctrl+Page_Down { move-window-to-workspace-down; }
@@ -662,7 +738,8 @@ binds {
     // Mod+Ctrl+1 { move-window-to-workspace 1; }
 
     // Switches focus between the current and the previous workspace.
-    Mod+Tab { focus-workspace-previous; }
+    Mod+Tab { focus-monitor-next; }
+    Mod+Shift+Tab { move-window-to-monitor-next; }
 
     // Mod+Shift+BracketLeft  { consume-window-into-column; }
     // Mod+Shift+BracketRight { expel-window-from-column; }
@@ -747,7 +824,7 @@ debug {
 
     // Disable the use of the cursor plane.
     // The cursor will be rendered together with the rest of the frame.
-    disable-cursor-plane
+    // disable-cursor-plane
 
     // Override the DRM device that niri will use for all rendering.
     // render-drm-device "/dev/dri/renderD128"
@@ -768,18 +845,19 @@ debug {
 // spawn-at-startup "alacritty" "-e" "fish"
 spawn-at-startup "hyprpaper"
 spawn-at-startup "swaync"
-spawn-at-startup "waybar"
+// spawn-at-startup "waybar"
+spawn-at-startup "systemctl" "restart" "--user" "waybar"
 spawn-at-startup "systemctl" "start" "--user" "foot-server"
 spawn-at-startup "systemctl" "start" "--user" "xwayland-satellite"
 // spawn-at-startup "systemctl" "start" "--user" "gammastep"
 spawn-at-startup "/usr/lib/polkit-kde-authentication-agent-1"
-spawn-at-startup "kdeconnectd"
-spawn-at-startup "kdeconnect-indicator"
+// spawn-at-startup "kdeconnectd"
+// spawn-at-startup "kdeconnect-indicator"
 spawn-at-startup "wl-paste" "--type" "text" "--watch" "cliphist" "store"
 spawn-at-startup "wl-paste" "--type" "image" "--watch" "cliphist" "store"
 spawn-at-startup "swayosd-server"
 spawn-at-startup "swayidle" "before-sleep" "'loginctl lock-session'" "lock" "'swaylock'"
 // spawn-at-startup "sunshine"
-spawn-at-startup "systemctl" "restart" "--user" "sunshine"
+// spawn-at-startup "systemctl" "restart" "--user" "sunshine"
 // spawn-at-startup "trackma"
 // spawn-at-startup "xwayland-satellite"
