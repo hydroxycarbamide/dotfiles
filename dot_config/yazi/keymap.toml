@@ -2,7 +2,7 @@
 # If you encounter any issues, please make an issue at https://github.com/yazi-rs/schemas.
 "$schema" = "https://yazi-rs.github.io/schemas/keymap.json"
 
-[manager]
+[mgr]
 
 keymap = [
 	{ on = "<Esc>", run = "escape",             desc = "Exit visual mode, clear selected, or cancel search" },
@@ -60,7 +60,6 @@ keymap = [
 
 	# Operation
 	{ on = "o",         run = "open",                        desc = "Open selected files" },
-	{ on = "O",         run = "open --interactive",          desc = "Open selected files interactively" },
 	{ on = "O",         run = "open --interactive",          desc = "Open selected files interactively" },
 	{ on = "<Enter>",   run = "enter",                        desc = "Open selected files" },
 	{ on = "<S-Enter>", run = "enter",          desc = "Open selected files interactively" },
@@ -160,19 +159,24 @@ keymap = [
 	{ on = "<F1>", run = "help", desc = "Open help" },
 ]
 
-[[manager.prepend_keymap]]
+[[mgr.prepend_keymap]]
 on   = [ "g", "i" ]
 run  = "plugin lazygit"
 desc = "run lazygit"
 
-[[manager.prepend_keymap]]
+[[mgr.prepend_keymap]]
 on  = "M"
 run = "plugin mount"
 
-[[manager.prepend_keymap]]
+[[mgr.prepend_keymap]]
 on   = [ "g", "c" ]
 run  = "plugin vcs-files"
 desc = "Show Git file changes"
+
+[[mgr.prepend_keymap]]
+on   = "T"
+run  = "plugin toggle-pane max-preview"
+desc = "Maximize or restore the preview pane"
 
 [tasks]
 
