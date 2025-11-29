@@ -1,0 +1,110 @@
+window-rule {
+    // match app-id="steam_app_*"
+    match app-id="cs2"
+    match app-id="gmod"
+    match app-id="genshinimpact.exe"
+    match app-id="henpri.exe"
+    match app-id="starrail.exe"
+    match app-id="zenlesszonezero.exe"
+    match app-id="osu!"
+    match app-id="Minecraft*"
+    match app-id="GhostOfTsushima*"
+    match app-id="SamabakeScramble*"
+    match app-id="samabakescramble*"
+    match app-id="gamescope"
+
+    variable-refresh-rate true
+    open-on-output "DP-1"
+    // open-on-workspace "browser"
+    open-maximized true
+    open-fullscreen true
+}
+
+window-rule {
+    match app-id="syncplay"
+    match app-id="mpv"
+    match app-id="discord"
+
+    // open-on-workspace "syncplay"
+}
+
+window-rule {
+    match app-id="firefox$" title="^Picture-in-Picture$"
+    match app-id="floorp$" title="^Picture-in-Picture$"
+    match app-id="zen$" title="^Picture-in-Picture$"
+
+    open-floating true
+    default-floating-position x=50 y=50 relative-to="bottom-right"
+    max-height 320
+}
+window-rule {
+    // match app-id="launcher.exe$" title="^Holoearth Launcher$"
+    match app-id="launcher.exe$"
+    // match title="^Holoearth*"
+    open-floating true
+}
+
+window-rule {
+    match app-id="foot*"
+    match app-id=r#"^org\.wezfurlong\.wezterm$"#
+    match app-id="fm-term"
+    default-column-width { proportion 0.5; }
+}
+
+// Here's a useful example. Work around WezTerm's initial configure bug
+// by setting an empty default-column-width.
+window-rule {
+    // This regular expression is intentionally made as specific as possible,
+    // since this is the default config, and we want no false positives.
+    // You can get away with just app-id="wezterm" if you want.
+    // The regular expression can match anywhere in the string.
+    match app-id=r#"^org\.wezfurlong\.wezterm$"#
+    default-column-width {}
+}
+
+window-rule {
+    geometry-corner-radius 10
+    clip-to-geometry true
+}
+
+window-rule {
+    match is-window-cast-target=true
+
+    focus-ring {
+        active-color "#ee99a0"
+        inactive-color "#ed8796"
+    }
+
+    border {
+        inactive-color "#ed8796"
+    }
+
+    shadow {
+        color "#7d0d2d70"
+    }
+
+    tab-indicator {
+        active-color "#ee99a0"
+        inactive-color "#ed8796"
+    }
+}
+
+layer-rule {
+    match namespace="^rofi$"
+    
+    shadow {
+        on
+    }
+
+    geometry-corner-radius 10
+}
+
+layer-rule {
+    match namespace="^swayosd$"
+    
+    shadow {
+        on
+    }
+
+    geometry-corner-radius 9999
+}
