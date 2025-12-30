@@ -3,10 +3,13 @@
 // which may be more convenient to use.
 // spawn-at-startup "alacritty" "-e" "fish"
 spawn-at-startup "hyprpaper"
-// spawn-at-startup "swaync"
-// spawn-at-startup "waybar"
-spawn-at-startup "systemctl" "restart" "--user" "waybar"
-spawn-at-startup "systemctl" "restart" "--user" "swaync"
+
+// replaced by dms
+// spawn-at-startup "systemctl" "restart" "--user" "waybar"
+// spawn-at-startup "systemctl" "restart" "--user" "swaync"
+// spawn-at-startup "swayosd-server"
+// spawn-at-startup "hypridle"
+
 spawn-at-startup "systemctl" "start" "--user" "foot-server"
 // spawn-at-startup "systemctl" "start" "--user" "xwayland-satellite"
 // spawn-at-startup "systemctl" "start" "--user" "gammastep"
@@ -15,9 +18,7 @@ spawn-at-startup "/usr/lib/polkit-kde-authentication-agent-1"
 // spawn-at-startup "kdeconnect-indicator"
 spawn-at-startup "wl-paste" "--type" "text" "--watch" "cliphist" "store"
 spawn-at-startup "wl-paste" "--type" "image" "--watch" "cliphist" "store"
-spawn-at-startup "swayosd-server"
 // spawn-at-startup "swayidle" "before-sleep" "'loginctl lock-session'" "lock" "'swaylock'"
-spawn-at-startup "hypridle"
 // spawn-at-startup "sunshine"
 // spawn-at-startup "systemctl" "restart" "--user" "sunshine"
 // spawn-at-startup "trackma"
