@@ -1,4 +1,5 @@
 zoxide init fish | source
+fzf --fish | source
 if status is-interactive
     # fenv source /etc/profile
     # Commands to run in interactive sessions can go here
@@ -6,10 +7,13 @@ if status is-interactive
     # doas
     # alias sudo='doas'
 
+    bind \ew append_wlcopy_to_last_command
+    bind \cg copy_last_command
+
     # ls
     alias exa='eza'
-    alias l='exa -lh --icons'
-    alias ls='exa --icons --group-directories-first'
+    alias l='exa -lhH --icons'
+    alias ls='exa -H --icons --group-directories-first'
     alias ll='exa -lah --icons'
     alias lm='exa -m'
     alias lr='exa -R'
@@ -65,6 +69,9 @@ if status is-interactive
     # pager
     alias less='bat --style plain'
 
+    # podman
+    alias lazypodman='DOCKER_HOST=unix:///run/user/1000/podman/podman.sock lazydocker'
+
     # helix
     alias hx='helix'
 
@@ -74,7 +81,6 @@ if status is-interactive
     # yazi
     # alias y='yazi'
     alias yz='yazi'
-
 
     function nnn_cd
         if test -n "$NNN_PIPE"
@@ -131,3 +137,8 @@ set -gx NNN_TERMINAL foot
 # source  /opt/miniconda3/etc/fish/conf.d/conda.fish
 
 starship init fish | source
+
+# Added by LM Studio CLI (lms)
+set -gx PATH $PATH /home/eric/.lmstudio/bin
+# End of LM Studio CLI section
+
