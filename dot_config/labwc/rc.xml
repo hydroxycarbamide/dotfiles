@@ -1,6 +1,6 @@
 <labwc_config>
   <theme>
-    <name></name>
+    <name>catpuccin</name>
     <cornerRadius>8</cornerRadius>
     <keepBorder>yes</keepBorder>
     <dropShadows>yes</dropShadows>
@@ -64,7 +64,7 @@
 
   <snapping>
     <!-- Set range to 0 to disable window snapping completely -->
-    <range>40</range>
+    <range inner="10" outer="10" />
     <overlay enabled="yes">
       <delay inner="200" outer="200" />
     </overlay>
@@ -88,44 +88,48 @@
     <repeatRate>50</repeatRate>
     <repeatDelay>200</repeatDelay>
 
-    <keybind key="W-S-q"><action name="Exit" /></keybind>
-    <keybind key="W-S-r"><action name="Reconfigure" /></keybind>
+    <keybind key="W-C-S-q"><action name="Exit" /></keybind>
+    <keybind key="W-C-S-r"><action name="Reconfigure" /></keybind>
 
     <keybind key="W-Return"><action name="Execute" command="footclient"/></keybind>
-    <keybind key="W-S-e"><action name="Execute" command="xdg-open ."/></keybind>
-    <keybind key="W-e"><action name="Execute" command="wezterm start --class fm-term yazi"/></keybind>
-    <keybind key="W-d"><action name="Execute" command="anyrun"/></keybind>
-    <keybind key="W-w"><action name="Execute" command="rofi -show window"/></keybind>
-    <keybind key="W-q"><action name="Execute" command="wlogout -p layer-shell"/></keybind>
-    <keybind key="W-v"><action name="Execute" command="sh -c 'cliphist list | rofi -dmenu | cliphist decode | wl-copy'"/></keybind>
-    <keybind key="W-S-s"><action name="Execute" command="hyprshot -m region"/></keybind>
-    <keybind key="W-p"><action name="Execute" command="hyprshot -m output"/></keybind>
+    <keybind key="W-S-t"><action name="Execute" command="xdg-open ."/></keybind>
+    <keybind key="W-t"><action name="Execute" command="footclient -a fm-term yazi"/></keybind>
+    <!-- <keybind key="W-d"><action name="Execute" command="rofi -show drun"/></keybind> -->
+    <!-- <keybind key="W-d"><action name="Execute" command="anyrun"/></keybind> -->
+    <keybind key="W-d"><action name="Execute" command="wofi --show"/></keybind>
+    <!-- <keybind key="W-d"><action name="Execute" command="dms ipc call spotlight toggle"/></keybind> -->
+    <keybind key="W-a"><action name="Execute" command="rofi -show window"/></keybind>
+    <!-- <keybind key="W-l"><action name="Execute" command="wlogout -p layer-shell"/></keybind> -->
+    <keybind key="W-l"><action name="Execute" command="dms ipc call powermenu toggle"/></keybind>
+    <!-- <keybind key="W-l"><action name="Execute" command="qs -c noctalia-shell ipc call sessionMenu toggle"/></keybind> -->
+    <!-- <keybind key="W-v"><action name="Execute" command="sh -c 'cliphist list | rofi -dmenu | cliphist decode | wl-copy'"/></keybind> -->
+    <keybind key="W-v"><action name="Execute" command="dms ipc call clipboard toggle"/></keybind>
+    <!-- <keybind key="W-v"><action name="Execute" command="qs -c noctalia-shell ipc call launcher clipboard"/></keybind> -->
+    <keybind key="W-S-s"><action name="Execute" command="hyprshot -m region -z"/></keybind>
+    <keybind key="W-s"><action name="Execute" command="hyprshot -m output -z"/></keybind>
     <keybind key="W-C-S-s"><action name="Execute" command="tesseract-shot.sh"/></keybind>
     <keybind key="W-b"><action name="Execute" command="killall -SIGUSR1 waybar"/></keybind>
+    
 
     <keybind key="W-c"><action name="Close"/></keybind>
     <keybind key="W-S-c"><action name="Kill"/></keybind>
-
-    <keybind key="W-f">
-      <action name="ToggleMaximize" />
-    </keybind>
 
     <keybind key="W-Space">
       <action name="ToggleMaximize" />
     </keybind>
 
-    <keybind key="W-S-f">
+    <keybind key="W-S-Space">
       <action name="ToggleFullscreen" />
     </keybind>
 
     <keybind key="XF86_AudioLowerVolume">
-      <action name="Execute" command="swayosd-client --output-volume lower" />
+      <action name="Execute" command="pactl set-sink-volume @DEFAULT_SINK@ -5%" />
     </keybind>
     <keybind key="XF86_AudioRaiseVolume">
-      <action name="Execute" command="swayosd-client --output-volume raise" />
+      <action name="Execute" command="pactl set-sink-volume @DEFAULT_SINK@ +5%" />
     </keybind>
     <keybind key="XF86_AudioMute">
-      <action name="Execute" command="swayosd-client --output-volume mute-toggle" />
+      <action name="Execute" command="pactl set-sink-mute @DEFAULT_SINK@ toggle" />
     </keybind>
     <keybind key="XF86_MonBrightnessUp">
       <action name="Execute" command="brightnessctl set +10%" />
@@ -144,12 +148,28 @@
     <keybind key="W-S-3"><action name="SendToDesktop" to="3" /></keybind>
     <keybind key="W-S-4"><action name="SendToDesktop" to="4" /></keybind>
 
-    <!-- <keybind key="A-Tab"> -->
-    <!--   <action name="NextWindow" /> -->
-    <!-- </keybind> -->
-    <!-- <keybind key="A-S-Tab"> -->
-    <!--   <action name="PreviousWindow" /> -->
-    <!-- </keybind> -->
+    <!-- Colemak binds -->
+    <keybind key="W-q"><action name="GoToDesktop" to="1" /></keybind>
+    <keybind key="W-w"><action name="GoToDesktop" to="2" /></keybind>
+    <keybind key="W-f"><action name="GoToDesktop" to="3" /></keybind>
+    <keybind key="W-p"><action name="GoToDesktop" to="4" /></keybind>
+
+    <keybind key="W-S-q"><action name="SendToDesktop" to="1" /></keybind>
+    <keybind key="W-S-w"><action name="SendToDesktop" to="2" /></keybind>
+    <keybind key="W-S-f"><action name="SendToDesktop" to="3" /></keybind>
+    <keybind key="W-S-p"><action name="SendToDesktop" to="4" /></keybind>
+    <keybind key="A-Tab">
+      <action name="NextWindow" />
+    </keybind>
+    <keybind key="A-S-Tab">
+      <action name="PreviousWindow" />
+    </keybind>
+    <keybind key="W-n">
+      <action name="NextWindow" />
+    </keybind>
+    <keybind key="W-e">
+      <action name="PreviousWindow" />
+    </keybind>
     <keybind key="W-i">
       <action name="NextWindow" />
     </keybind>
@@ -162,12 +182,12 @@
     <keybind key="W-k">
       <action name="PreviousWindow" />
     </keybind>
-    <keybind key="W-l">
-      <action name="NextWindow" />
-    </keybind>
-    <keybind key="W-h">
-      <action name="PreviousWindow" />
-    </keybind>
+    <!-- <keybind key="W-l"> -->
+    <!--   <action name="NextWindow" /> -->
+    <!-- </keybind> -->
+    <!-- <keybind key="W-h"> -->
+    <!--   <action name="PreviousWindow" /> -->
+    <!-- </keybind> -->
 
     <keybind key="W-period">
       <action name="FocusOutput" direction="left" wrap="yes" />
@@ -414,24 +434,25 @@
 
   <libinput>
     <device category="default">
-      <naturalScroll></naturalScroll>
-      <leftHanded></leftHanded>
+      <naturalScroll>no</naturalScroll>
+      <leftHanded>no</leftHanded>
       <pointerSpeed>0.0</pointerSpeed>
       <accelProfile>flat</accelProfile>
       <tap>yes</tap>
-      <tapButtonMap></tapButtonMap>
-      <tapAndDrag></tapAndDrag>
-      <dragLock></dragLock>
-      <middleEmulation></middleEmulation>
-      <disableWhileTyping></disableWhileTyping>
-      <clickMethod></clickMethod>
-      <sendEventsMode></sendEventsMode>
-      <calibrationMatrix></calibrationMatrix>
+      <tapButtonMap>lrm</tapButtonMap>
+      <tapAndDrag>yes</tapAndDrag>
+      <dragLock>yes</dragLock>
+      <threeFingerDrag>yes</threeFingerDrag>
+      <middleEmulation>no</middleEmulation>
+      <disableWhileTyping>yes</disableWhileTyping>
+      <clickMethod>buttonAreas</clickMethod>
+      <sendEventsMode>yes</sendEventsMode>
       <scrollFactor>1.0</scrollFactor>
     </device>
   </libinput>
 
-  <windowSwitcher show="yes" preview="yes" outlines="yes" allWorkspaces="no">
+  <windowSwitcher preview="yes" outlines="yes" unshade="yes">
+    <osd show="yes" style="thumbnail" output="all" thumbnailLabelFormat="%T" />
     <fields>
       <!-- <field content="type" width="25%" /> -->
       <field content="icon" width="5%" />
@@ -446,4 +467,15 @@
     <ignoreButtonReleasePeriod>250</ignoreButtonReleasePeriod>
     <showIcons>yes</showIcons>
   </menu>
+
+  <!-- <windowRules> -->
+  <!--   <windowRule identifier="foot"> -->
+  <!--     <action name="SendToDesktop" to="2" follow="yes" /> -->
+  <!--   </windowRule> -->
+  <!---->
+  <!--   <windowRule identifier="footclient"> -->
+  <!--     <action name="SendToDesktop" to="2" follow="yes" /> -->
+  <!--   </windowRule> -->
+  <!---->
+  <!-- </windowRules> -->
 </labwc_config>

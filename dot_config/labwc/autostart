@@ -1,7 +1,7 @@
 #!/bin/bash
 
-hyprpaper >/dev/null 2>&1 &
-swayosd-server >/dev/null 2>&1 &
+
+# hyprpaper >/dev/null 2>&1 &
 # swayidle before-sleep 'loginctl lock-session' lock 'swaylock' >/dev/null 2>&1 &
 
 wl-clip-persist --clipboard regular &
@@ -9,9 +9,18 @@ wl-paste --type text --watch cliphist store >/dev/null 2>&1 &
 wl-paste --type image --watch cliphist store >/dev/null 2>&1 &
 
 /usr/lib/polkit-kde-authentication-agent-1 &
+# /usr/lib/hyprpolkitagent/hyprpolkitagent &
 
 systemctl start --user foot-server
-systemctl start --user swaync
-systemctl restart --user hypridle
-systemctl restart --user kanshi
-systemctl restart --user waybar
+systemctl start --user kanshi
+
+# replaced by dms
+# systemctl restart --user hypridle
+# systemctl restart --user waybar
+# swayosd-server >/dev/null 2>&1 &
+# systemctl start --user swaync
+
+
+systemctl start --user dms
+# dms run
+# systemctl start --user noctalia
